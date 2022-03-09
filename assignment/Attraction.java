@@ -95,7 +95,7 @@ public class Attraction {
             this.fast.offer(person);
 
             // Pops FastPass
-            person.getNextFastPass();
+            person.removeFastPass();
         } else {
             this.regular.offer(person);
         }

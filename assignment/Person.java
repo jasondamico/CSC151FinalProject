@@ -108,7 +108,7 @@ public class Person {
 
     public FastPass removeFastPass() {
         if (this.fastPasses.size() > 0) {
-            return this.fastPasses.remove(fastPasses.size() - 1)
+            return this.fastPasses.remove(fastPasses.size() - 1);
         } else {
             return null;
         }
