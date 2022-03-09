@@ -1,14 +1,12 @@
 package assignment;
 
-import org.w3c.dom.Attr;
-
 public class Main
 {
 
     public static void main(String[] args)
     {
+        Time day = new Time();
         int duration = 480; //8 hours
-        int timePassed = 0; //goes up by 5 per step
         int population = 10; //editable - how many visitors the park is getting
 
         int fastPassUsage = 0; //for finding average fastpass usage
@@ -21,16 +19,22 @@ public class Main
         Attraction[] listofRides = {att1, att2, att3, att4};
         Park codeLand = new Park("Code Land!", listofRides);
 
-        Person one = new Person(1, 120, 480, 60, true, false); //1 hour balk time
+        Person one = new Person(1, 120, duration, 60, true, false); //1 hour balk time
 
-        if (timePassed < duration)
+        while (day.getCurrentTime() <= duration)
         {
+            //use the list of people in the park, grab the people and have them pick their attraction
+            //if they're already in a line and aren't boarding then they'll
+            //arrayofpeople who just got off ride, use pick attraction
+            
+
+            //arraylist of people who are in the park
+
             //wait times change/calculations
             //go on rides
-
-            timePassed += 5;
+            day.setCurrentTime(day.getCurrentTime() + 5); //5 minutes pass
         }
-        //Duration
+
         //Population
         //stepping
 
