@@ -1,39 +1,34 @@
+
 package assignment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Park {
-    private HashMap<String, Attraction> attractions;
+    private ArrayList<Attraction> attractions;
+    private ArrayList<Person> doneForDay;
     private String name;
 
     public Park() {
         this.name = "";
-        this.attractions = new HashMap<String, Attraction>();
+        this.attractions = new ArrayList<Attraction>();
+        this.doneForDay = new ArrayList<Person>();
     }
 
     public Park(String name) {
-        attractions = new HashMap<String, Attraction>();
+        attractions = new ArrayList<Attraction>();
         this.setName(name);
+        this.doneForDay = new ArrayList<Person>();
     }
     
-    public Park(String name, Attraction[] attractionsArray){
+    public Park(String name, ArrayList<Attraction> attractions){
         this.setName(name);
-        for(int i = 0; i < attractionsArray.length; i++){
-            this.attractions.put(attractionsArray[i].getName(), attractionsArray[i]);
+        this.attractions = new ArrayList<Attraction>();
+        for(int i = 0; i < attractions.size(); i++) {
+        	this.attractions.add(attractions.get(i));
         }
+        this.doneForDay = new ArrayList<Person>();
     }
-    
-    public void addAttraction(String name, Attraction attraction){
-        attractions.put(name, attraction);
-    }
-    
-//     public ArrayList<Attraction> rankByPopularity(){
-//         ArrayList<Attraction> toReturn = new ArrayList<Attraction>();
-//         Collections.addAll(attractions.values(), toReturn);
-//         for(int i = 0; i < toReturn.size(); i++){
-            
-//         }
-//     }
 
     public String getName() {
         return name;
@@ -42,4 +37,20 @@ public class Park {
     public void setName(String name) {
         this.name = name;
     }
+    
+    /**
+     * pickAttraction
+     * @param p 
+     * @param attractions 
+     */
+    public Attraction pickAttraction(Person p, ArrayList<Attraction> attractions) {
+    	if(p.hasFastPass()) {
+    		if()
+    	}
+    	else {
+    		
+    	}
+    }
+    
+    
 }
