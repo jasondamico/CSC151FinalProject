@@ -162,4 +162,10 @@ public class Person {
 
         return toReturn;
     }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 20; i++) {
+            System.out.println(new Person(i));
+        }
+    }
 }

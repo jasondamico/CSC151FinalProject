@@ -184,4 +184,8 @@ public class Attraction {
 
         return toReturn;
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Attraction("Foo", 10, 15, 5));
+    }
 }
