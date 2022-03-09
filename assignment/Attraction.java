@@ -89,4 +89,66 @@ public class Attraction {
     public void setCurrentlyInLine(int currentlyInLine) {
         this.currentlyInLine = currentlyInLine;
     }
+
+    public void addPersonToLine(Person person, boolean hasFastPass) {
+        if (hasFastPass) {
+            this.fast.offer(person);
+
+            // Pops FastPass
+            person.getNextFastPass();
+        } else {
+            this.regular.offer(person);
+        }
+
+        this.currentlyInLine++;
+    }
+
+    /**
+     * Precondition: Attraction is not currently running.
+     */
+    public void startRide() {
+        int seatsFilled = 0;
+        boolean queuesEmpty = false;
+
+        while (seatsFilled < capacity && !queuesEmpty) {
+            if (this.fast.peek() != null) {
+                this.onRide[seatsFilled] = this.fast.remove();
+                seatsFilled++;
+                this.currentlyInLine--;
+            } else if (this.regular.peek() != null) {
+                this.onRide[seatsFilled] = this.regular.remove();
+                seatsFilled++;
+                this.currentlyInLine--;
+            } else {
+                // Assertion: both queues are empty
+                queuesEmpty = true;
+            }
+        }
+
+        if (seatsFilled > 0) {
+            this.setCurrentlyRunning(true);
+        } else {
+            this.setCurrentlyRunning(false);
+        }
+    }
+
+    public Person[] checkRuntime(int currentTime) {
+        if (currentTime == this.getRideStartTime() + this.getDuration()) {
+            // Assertion: ride has finished
+            Person[] leavingRiders = this.onRide;
+            this.onRide = new Person[capacity];
+
+            this.setCurrentlyRunning(false);
+            return leavingRiders;
+        } else {
+            return null;
+        }
+    }
+
+    public int getWaitTime(int currentTime) {
+        int untilRideIsDone = currentTime - this.getRideStartTime();
+        int lineWait = this.currentlyInLine / this.getCapacity();
+
+        return untilRideIsDone + lineWait;
+    }
 }
