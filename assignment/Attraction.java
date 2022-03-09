@@ -103,6 +103,20 @@ public class Attraction {
         this.currentlyInLine++;
     }
 
+    public int numPeopleOnRide() {
+        int peopleOnRide = 0;
+
+        for (Person p : this.onRide) {
+            if (p != null) {
+                peopleOnRide++;
+            } else {
+                return peopleOnRide;
+            }
+        }
+
+        return peopleOnRide;
+    }
+
     /**
      * Precondition: Attraction is not currently running.
      */
