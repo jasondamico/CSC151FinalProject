@@ -2,6 +2,7 @@ package assignment;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.lang.Math;
 
 public class Person {
     // PIVs
@@ -15,7 +16,11 @@ public class Person {
     private ArrayList<Attraction> ridesVisited;
     private ArrayList<FastPass> fastPasses;
     private int balkPoint;
+
     private final int NO_BALKPOINT = 10000;
+    private final int MAX_STAY = 480;
+    private final int MIN_STAY = 120;
+    private final int STAY_RANGE = 360;
     
     public Person() {
         this.setId(0);
@@ -28,6 +33,18 @@ public class Person {
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
         this.balkPoint = 0;
+    }
+
+    public Person(int id) {
+        this.id = id;
+
+        this.setMinStay((int) (STAY_RANGE * Math.random()) + MIN_STAY);
+        this.setMaxStay(MAX_STAY);
+        this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
+        this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
+        this.setBalkPoint(NO_BALKPOINT);
+        this.ridesVisited = new ArrayList<>();
+        this.fastPasses = new ArrayList<>();
     }
 
     public Person(int id, int minStay, int maxStay, int balkPoint, boolean wantsPopularRides, boolean wantsMostRides) {
