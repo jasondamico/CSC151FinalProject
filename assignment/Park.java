@@ -14,12 +14,6 @@ public class Park {
         this.attractions = new ArrayList<Attraction>();
         this.doneForDay = new ArrayList<Person>();
     }
-
-    public Park(String name) {
-        attractions = new ArrayList<Attraction>();
-        this.setName(name);
-        this.doneForDay = new ArrayList<Person>();
-    }
     
     public Park(String name, ArrayList<Attraction> attractions){
         this.setName(name);
