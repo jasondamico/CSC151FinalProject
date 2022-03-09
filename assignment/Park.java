@@ -2,6 +2,7 @@
 package assignment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Park {
@@ -18,9 +19,15 @@ public class Park {
     public Park(String name, ArrayList<Attraction> attractions){
         this.setName(name);
         this.attractions = new ArrayList<Attraction>();
+
         for(int i = 0; i < attractions.size(); i++) {
         	this.attractions.add(attractions.get(i));
         }
+
+        // Sort in descending order (by popularity)
+        Collections.sort(this.attractions);
+        Collections.reverse(this.attractions);
+
         this.doneForDay = new ArrayList<Person>();
     }
 
