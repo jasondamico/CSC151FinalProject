@@ -39,17 +39,104 @@ public class Park {
         this.name = name;
     }
     
+     public Attraction getMinWaitTime(ArrayList<Attraction> attractions) {
+    	if(attractions.isEmpty()) {
+    		return null;
+    	}
+    	Attraction toReturn = attractions.get(0);
+    	for(int i = 0; i < attractions.size(); i ++) {
+    		if(attractions.get(i).getWaitTime() < toReturn.getWaitTime()) {
+    			toReturn = attractions.get(i);
+    		}
+    	}
+    	return toReturn;
+    }
+    
+    public Attraction getMaxWaitTime(ArrayList<Attraction> attractions) {
+    	if(attractions.isEmpty()) {
+    		return null;
+    	}
+    	Attraction toReturn = attractions.get(0);
+    	for(int i = 0; i < attractions.size(); i ++) {
+    		if(attractions.get(i).getWaitTime() > toReturn.getWaitTime()) {
+    			toReturn = attractions.get(i);
+    		}
+    	}
+    	return toReturn;
+    }
+    
+    private ArrayList<Attraction> getThreeMostPopular(){
+    	ArrayList<Attraction> toReturn = new ArrayList<Attraction>();
+    	for(int i = 0; i < 3; i++) {
+    		toReturn.add(this.attractions.get(i));
+    	}
+    	return toReturn;
+    }
+    
     /**
      * pickAttraction
      * @param p 
      * @param attractions 
+     * @return Attraction to queue person p into, or null for the person to leave the park
      */
     public Attraction pickAttraction(Person p, ArrayList<Attraction> attractions) {
+    	if(time >= p.getMaxStay()) {
+    		return null;
+    	}
     	if(p.hasFastPass()) {
-    		if()
+    		if(p.isWantsPopularRides()) {
+    			//assertion: attractions is sorted greatest to least by popularity
+    			return attractions.get(0);
+    		}
+    		if(p.isWantsMostRides()) {
+    			return this.getMaxWaitTime(attractions);
+    		}
     	}
     	else {
-    		
+    		if(p.isWantsPopularRides() && p.isWantsMostRides()) {
+    			Attraction mostPopularShortestWaitTime = this.getMinWaitTime(this.getThreeMostPopular());
+    			if(mostPopularShortestWaitTime.getWaitTime() > p.getBalkPoint()) {
+    				for(int i = 0; i < attractions.size(); i++) {
+    					if(attractions.get(i).getWaitTime() < p.getBalkPoint()) {
+    						return attractions.get(i);
+    					}
+    				}
+    			}
+    			else {
+    				return mostPopularShortestWaitTime;
+    			}
+    			if(p.getMinStay() < time) {
+    				//assertion: attractions is sorted greatest to least by popularity
+    				return attractions.get(0);
+    			}
+    			return null;
+    		}
+    		else if(p.isWantsPopularRides()) {
+    			for(int i = 0; i < attractions.size(); i++) {
+					if(attractions.get(i).getWaitTime() < p.getBalkPoint()) {
+						return attractions.get(i);
+					}
+				}
+    			if(p.getMinStay() < time) {
+    				//person hasn't stayed late enough, they suck it up and go on the ride they most desire
+    				return attractions.get(0);
+    			}
+    			return null;
+    		}
+    		else if(p.isWantsMostRides()) {
+    			if(this.getMinWaitTime(attractions).getWaitTime() > p.getBalkPoint()) {
+    				if(p.getMinStay() < time){
+    					return this.getMinWaitTime(attractions);
+    				}
+    				return null;
+    			}
+    			else {
+    				return this.getMinWaitTime(attractions);
+    			}
+    		}
+    		else {
+    			return attractions.get((int) Math.random() * attractions.size());
+    		}
     	}
     }
 
