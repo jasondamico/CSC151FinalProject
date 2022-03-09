@@ -151,4 +151,11 @@ public class Attraction {
 
         return untilRideIsDone + lineWait;
     }
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+
+        return toReturn;
+    }
 }

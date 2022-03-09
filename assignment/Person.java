@@ -13,7 +13,7 @@ public class Person {
     private boolean wantsPopularRides;
     private boolean wantsMostRides;
     private ArrayList<Attraction> ridesVisited;
-    private Stack<FastPass> fastPasses;
+    private ArrayList<FastPass> fastPasses;
     private int balkPoint;
     private final int NO_BALKPOINT = 10000;
     
@@ -26,7 +26,7 @@ public class Person {
         this.setWantsPopularRides(false);
         
         this.ridesVisited = new ArrayList<>();
-        this.fastPasses = new Stack<>();
+        this.fastPasses = new ArrayList<>();
         this.balkPoint = 0;
     }
 
@@ -39,7 +39,7 @@ public class Person {
         this.wantsMostRides = wantsMostRides;
 
         this.ridesVisited = new ArrayList<>();
-        this.fastPasses = new Stack<>();
+        this.fastPasses = new ArrayList<>();
     }
 
     public int getId() {
@@ -106,10 +106,18 @@ public class Person {
         this.fastPasses.add(fp);
     }
 
-    public FastPass getNextFastPass() {
-        return this.fastPasses.pop();
+    public FastPass removeFastPass() {
+        if (this.fastPasses.size() > 0) {
+            return this.fastPasses.remove(fastPasses.size() - 1)
+        } else {
+            return null;
+        }
     }
-    
+
+    public int numFastPasses() {
+        return this.fastPasses.size();
+    }
+
     public Attraction pickAttraction(){
         return null;   
     }
