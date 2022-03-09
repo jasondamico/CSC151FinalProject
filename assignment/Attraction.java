@@ -1,0 +1,92 @@
+package assignment;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Attraction {
+
+    // PRIVATE INSTANCE VARIABLES
+
+    private String name;
+    private Queue<Person> regular;
+    private Queue<Person> fast;
+    private int popularityScore;
+    private int capacity;
+    private Person[] onRide;
+    private boolean currentlyRunning;
+    private int duration;
+    private int rideStartTime;
+    private int currentlyInLine;
+    // TODO: Add currently in regular line, fast line
+
+    public Attraction(String name, int popularityScore, int capacity, int duration) {
+        this.name = name;
+        this.popularityScore = popularityScore;
+        this.capacity = capacity;
+        this.duration = duration;
+
+        // Values initialized to empty values, do not take argument values
+        this.regular = new LinkedList<>();
+        this.fast = new LinkedList<>();
+        this.onRide = new Person[capacity];
+        this.currentlyRunning = false;
+        this.rideStartTime = -1;
+        this.currentlyInLine = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    private void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPopularityScore() {
+        return popularityScore;
+    }
+
+    private void setPopularityScore(int popularityScore) {
+        this.popularityScore = popularityScore;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    private void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public boolean isCurrentlyRunning() {
+        return currentlyRunning;
+    }
+
+    private void setCurrentlyRunning(boolean currentlyRunning) {
+        this.currentlyRunning = currentlyRunning;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    private void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getRideStartTime() {
+        return rideStartTime;
+    }
+
+    private void setRideStartTime(int rideStartTime) {
+        this.rideStartTime = rideStartTime;
+    }
+
+    public int getCurrentlyInLine() {
+        return currentlyInLine;
+    }
+
+    public void setCurrentlyInLine(int currentlyInLine) {
+        this.currentlyInLine = currentlyInLine;
+    }
+}
