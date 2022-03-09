@@ -3,7 +3,7 @@ package assignment;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Attraction {
+public class Attraction implements Comparable<Attraction> {
 
     // PRIVATE INSTANCE VARIABLES
 
@@ -115,6 +115,17 @@ public class Attraction {
         }
 
         return peopleOnRide;
+    }
+
+    public int compareTo(Attraction otherAttraction) {
+        if (this.getPopularityScore() > otherAttraction.getPopularityScore()) {
+            return 1;
+        } else if (this.getPopularityScore() < otherAttraction.getPopularityScore()) {
+            return -1;
+        } else {
+            // Assertion: the two popularity scores are equal 
+            return 0;
+        }
     }
 
     /**
