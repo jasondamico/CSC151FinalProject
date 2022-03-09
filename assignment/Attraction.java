@@ -78,7 +78,7 @@ public class Attraction implements Comparable<Attraction> {
         return rideStartTime;
     }
 
-    private void setRideStartTime(int rideStartTime) {
+    public void setRideStartTime(int rideStartTime) {
         this.rideStartTime = rideStartTime;
     }
 
