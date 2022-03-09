@@ -1,0 +1,21 @@
+package assignment;
+
+public class Time 
+{
+    private int currentTime;
+    
+    public Time()
+    {
+        this.currentTime = 0;
+    }
+
+    public int getCurrentTime() 
+    {
+        return currentTime;
+    }
+
+    public void setCurrentTime(int currentTime) 
+    {
+        this.currentTime = currentTime;
+    }
+}
