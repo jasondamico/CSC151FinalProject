@@ -163,6 +163,13 @@ public class Person {
         return toReturn;
     }
 
+     public boolean hasFastPass() {
+    	if(numFastPasses() > 0) {
+    		return true;
+    	}
+    	return false;
+    }
+    
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             System.out.println(new Person(i));
