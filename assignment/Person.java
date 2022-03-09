@@ -111,8 +111,6 @@ public class Person {
     }
     
     public Attraction pickAttraction(){
-        
+        return null;   
     }
-    
-    
 }

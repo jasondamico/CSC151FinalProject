@@ -1,5 +1,7 @@
 package assignment;
 
+import java.util.HashMap;
+
 public class Park {
     private HashMap<String, Attraction> attractions;
     private String name;
@@ -21,7 +23,7 @@ public class Park {
         }
     }
     
-    public void addAttraction(String name, Attreaction attraction){
+    public void addAttraction(String name, Attraction attraction){
         attractions.put(name, attraction);
     }
     
