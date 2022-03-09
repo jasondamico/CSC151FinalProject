@@ -45,6 +45,27 @@ public class Park {
     		
     	}
     }
+
+    public String toString() {
+        String toReturn = "Welcome to " + this.getName() + "! Our attractions are as follows:\n\n";
+        
+        for (Attraction atr : this.attractions) {
+            toReturn += atr + "\n";
+        }
+
+        return toReturn;
+    }
     
+    public static void main(String[] args) {
+        ArrayList<Attraction> atr = new ArrayList<>();
+
+        atr.add(new Attraction("test1", 10, 9, 8));
+        atr.add(new Attraction("test2", 3, 2, 1));
+        atr.add(new Attraction("test3", 6, 3, 4));
+
+        Park p = new Park("Test park", atr);
+
+        System.out.println(p);
+    }
     
 }
