@@ -1,25 +1,37 @@
 package assignment;
 
 public class Park {
-    private Attraction[] attractions;   // Change to hash map
+    private HashMap<String, Attraction> attractions;
     private String name;
 
     public Park() {
-
+        this.name = "";
+        this.attractions = new HashMap<String, Attraction>();
     }
 
-    public Park(String name, Attraction[] attractions) {
-        this.setAttractions(attractions);
+    public Park(String name) {
+        attractions = new HashMap<String, Attraction>();
         this.setName(name);
     }
-
-    public Attraction[] getAttractions() {
-        return attractions;
+    
+    public Park(String name, Attraction[] attractionsArray){
+        this.setName(name);
+        for(int i = 0; i < attractionsArray.length; i++){
+            this.attractions.put(attractionsArray[i].getName(), attractionsArray[i]);
+        }
     }
-
-    public void setAttractions(Attraction[] attractions) {
-        this.attractions = attractions;
+    
+    public void addAttraction(String name, Attreaction attraction){
+        attractions.put(name, attraction);
     }
+    
+//     public ArrayList<Attraction> rankByPopularity(){
+//         ArrayList<Attraction> toReturn = new ArrayList<Attraction>();
+//         Collections.addAll(attractions.values(), toReturn);
+//         for(int i = 0; i < toReturn.size(); i++){
+            
+//         }
+//     }
 
     public String getName() {
         return name;
