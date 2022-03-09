@@ -7,25 +7,34 @@ public class Person {
     // PIVs
 
     private int id;
-    private int durationOfStay;
+    //private int durationOfStay;
+    private int minStay;
+    private int maxStay;
     private boolean wantsPopularRides;
     private boolean wantsMostRides;
     private ArrayList<Attraction> ridesVisited;
     private Stack<FastPass> fastPasses;
-
+    private int balkPoint;
+    private final int NO_BALKPOINT = 10000;
+    
     public Person() {
         this.setId(0);
-        this.setTimeToStay(10);
+        this.setMinStay(0);
+        this.setMaxStay(10);
+        this.setBalkPoint(NO_BALKPOINT);
         this.setWantsMostRides(false);
         this.setWantsPopularRides(false);
-
+        
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new Stack<>();
+        this.balkPoint = 0;
     }
 
-    public Person(int id, int durationOfStay, boolean wantsPopularRides, boolean wantsMostRides) {
+    public Person(int id, int minStay, int maxStay, int balkPoint, boolean wantsPopularRides, boolean wantsMostRides) {
         this.id = id;
-        this.durationOfStay = durationOfStay;
+        this.minStay = minStay;
+        this.maxStay = maxStay;
+        this.balkPoint = balkPoint;
         this.wantsPopularRides = wantsPopularRides;
         this.wantsMostRides = wantsMostRides;
 
@@ -41,14 +50,38 @@ public class Person {
         this.id = id;
     }
 
-    public int getDurationOfStay() {
-        return this.durationOfStay;
+//     public int getDurationOfStay() {
+//         return this.durationOfStay;
+//     }
+
+//     public void setDurationOfStay(int durationOfStay) {
+//         this.durationOfStay = durationOfStay;
+//     }
+    
+    public int getMinStay(){
+        return this.minStay;
     }
 
-    public void setDurationOfStay(int durationOfStay) {
-        this.durationOfStay = durationOfStay;
+    public void setMinStay(int minStay){
+        this.minStay = minStay;
     }
-
+    
+    public int getMaxStay(){
+        return this.maxStay;
+    }
+    
+    public void setMaxStay(int maxStay){
+        this.maxStay = maxStay;
+    }
+    
+    public int getBalkPoint(){
+        return this.balkPoint;
+    }
+    
+    public void setBalkPoint(int balkPoint){
+        this.balkPoint = balkPoint;
+    }
+    
     public boolean isWantsPopularRides() {
         return wantsPopularRides;
     }
@@ -76,4 +109,10 @@ public class Person {
     public FastPass getNextFastPass() {
         return this.fastPasses.pop();
     }
+    
+    public Attraction pickAttraction(){
+        
+    }
+    
+    
 }
