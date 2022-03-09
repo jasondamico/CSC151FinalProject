@@ -168,7 +168,19 @@ public class Attraction {
 
     @Override
     public String toString() {
-        String toReturn = "";
+        String toReturn = this.getName() + ":\n========================\n";
+        toReturn += "Capacity: " + this.getCapacity() + "\n";
+        toReturn += "Popularity score: " + this.getPopularityScore() + "\n";
+        toReturn += "Ride duration: " + this.getDuration() + "\n";
+
+        toReturn += "People currently on ride (" + this.numPeopleOnRide() + "):\n";
+
+        for (int i = 0; i < this.numPeopleOnRide(); i++) {
+            Person p = this.onRide[i];
+            toReturn += "\t" + p + "\n\n";
+        }
+
+        toReturn += "Total People in queue: " + this.getCurrentlyInLine() + "\n\n";
 
         return toReturn;
     }

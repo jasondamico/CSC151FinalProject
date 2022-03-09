@@ -138,4 +138,28 @@ public class Person {
     public Attraction pickAttraction(){
         return null;   
     }
+
+    @Override
+    public String toString() {
+        String toReturn = "PERSON ID: " + this.getId() + "\n";
+        toReturn += "RIDES VISITED: ";
+
+        for (int i = 0; i < this.ridesVisited.size(); i++) {
+            Attraction a = this.ridesVisited.get(i);
+            
+            if (i != this.ridesVisited.size() - 1) {
+                toReturn += a.getName() + ", ";
+            } else {
+                toReturn += a.getName();
+            }
+        }
+
+        toReturn += "\nMin leave time: " + this.getMinStay();
+        toReturn += "\nMax leave time: " + this.getMaxStay();
+        toReturn += "\nNumber of fast passes: " + this.numFastPasses();
+        toReturn += "\nWants popular rides: " + this.isWantsPopularRides();
+        toReturn += "\nWants most rides: " + this.isWantsMostRides();
+
+        return toReturn;
+    }
 }
