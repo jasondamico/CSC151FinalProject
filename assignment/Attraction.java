@@ -100,6 +100,9 @@ public class Attraction implements Comparable<Attraction> {
             this.regular.offer(person);
         }
 
+        // Initialize waitTime value for person
+        person.addWaitTime(new WaitTime(Main.currentTime.getCurrentTime()));
+
         this.currentlyInLine++;
     }
 
@@ -135,13 +138,25 @@ public class Attraction implements Comparable<Attraction> {
         int seatsFilled = 0;
         boolean queuesEmpty = false;
 
+        // Loop until all seats filled
         while (seatsFilled < capacity && !queuesEmpty) {
-            if (this.fast.peek() != null) {
-                this.onRide[seatsFilled] = this.fast.remove();
-                seatsFilled++;
-                this.currentlyInLine--;
-            } else if (this.regular.peek() != null) {
-                this.onRide[seatsFilled] = this.regular.remove();
+            // Checking to see if either of the lines have people in them
+            if (this.fast.peek() != null || this.regular.peek() != null) {
+                Person p;
+
+                // Initializing person
+                if (this.fast.peek() != null) {
+                    p = this.fast.remove();
+                } else {
+                    p = this.regular.remove();
+                }
+
+                // Set ending wait time of rider leaving queue
+                p.getLastWaitTime().setEndWait(Main.currentTime.getCurrentTime());
+
+                // Put person on ride
+                this.onRide[seatsFilled] = p;
+
                 seatsFilled++;
                 this.currentlyInLine--;
             } else {
