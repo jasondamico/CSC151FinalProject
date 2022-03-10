@@ -226,8 +226,23 @@ public class Attraction implements Comparable<Attraction> {
         System.out.println(new Attraction("Foo", 10, 15, 5));
     }
     
-    public ArrayList<Person> closeAttraction(){
-    	return new ArrayList<Person>(this.regular);
+    public ArrayList<Person> closeAttraction() {
+        // People who were in the lines
+    	ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
+        peopleLeavingRide.addAll(this.fast);
+        
+        // Add all people who were on the ride
+        for (int i = 0; i < this.onRide.length; i++) {
+            Person p = this.onRide[i];
+
+            if (p == null) {
+                break;
+            } else {
+                peopleLeavingRide.add(p);
+            }
+        }
+        
+        return peopleLeavingRide;
     }
     
 }
