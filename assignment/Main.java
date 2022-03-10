@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Main
 {
     public static Time currentTime = new Time();
+    public static int parkHours = 480; //8 hours
 
     public static void main(String[] args)
     {
-        int duration = 480; //8 hours
 
         int fastPassUsage = 0; //for finding average fastpass usage
 
@@ -23,13 +23,13 @@ public class Main
         listofRides.add(att2);
         listofRides.add(att3);
         listofRides.add(att4);
-        
+
         Park codeLand = new Park("Code Land!", listofRides);
 
         Person test = new Person();
 
 
-        while (currentTime.getCurrentTime() <= duration)
+        while (currentTime.getCurrentTime() <= parkHours)
         {
             //people enter park - list of people (random number)
              /*
