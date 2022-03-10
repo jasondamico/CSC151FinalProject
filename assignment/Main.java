@@ -22,8 +22,9 @@ public class Main
 
     public static void main(String[] args)
     {
+    	
         int fastPassUsage = 0; //for finding average fastpass usage
-        int population = 10;
+        int population = 10000;
 
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
         Attraction att2 = new Attraction("The Queue Coaster", 5, 8, 5);
@@ -37,7 +38,7 @@ public class Main
         listofRides.add(att4);
 
         Park codeLand = new Park("Code Land!", listofRides);
-
+        
         // Adding initial people to park
         ArrayList<Person> customers = new ArrayList<>();
         for (int i = 0; i < population; i++)
@@ -55,7 +56,7 @@ public class Main
             }
         }
 
-        while (currentTime.getCurrentTime() <= parkHours)
+        while (currentTime.getCurrentTime() <= parkHours+10)
         {
             for (Attraction ride: listofRides)
             {
@@ -92,6 +93,16 @@ public class Main
 
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
+        
+        //Close all rides
+        for(int i = 0; i < codeLand.getAttractions().size(); i++) {
+        	Attraction currentAttraction = codeLand.getAttractions().get(i);
+        	ArrayList<Person> disgruntledPeople = currentAttraction.closeAttraction();
+        	for(int j = 0; j < disgruntledPeople.size(); j++) {
+        		codeLand.addToDoneForDay(disgruntledPeople.get(j));
+        	}
+        }
+        
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
@@ -106,7 +117,9 @@ public class Main
                 totalTimeWaited += waitTime;
             }
         }
-
+        
+        System.out.println(totalTimeWaited);
+        System.out.println(doneForDay.size());
         System.out.println(totalTimeWaited / doneForDay.size());
     }
 }
