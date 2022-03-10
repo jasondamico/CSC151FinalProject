@@ -1,6 +1,7 @@
 package assignment;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 import java.lang.Math;
 
@@ -13,6 +14,7 @@ public class Person {
     private int maxStay;
     private boolean wantsPopularRides;
     private boolean wantsMostRides;
+    private int arrivalTime = 0;
     private ArrayList<Attraction> ridesVisited;
     private ArrayList<FastPass> fastPasses;
     private int balkPoint;
@@ -21,8 +23,9 @@ public class Person {
     private final int MAX_STAY = 480;
     private final int MIN_STAY = 120;
     private final int STAY_RANGE = 360;
-    
-    public Person() {
+
+    public Person() 
+    {
         this.setId(0);
         this.setMinStay(0);
         this.setMaxStay(10);
@@ -32,7 +35,7 @@ public class Person {
         this.arrivalTime = Main.currentTime.getCurrentTime();
         this.minStay = this.arrivalTime;
         this.maxStay = MAX_STAY;
-        
+
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
         this.balkPoint = 0;
@@ -40,19 +43,19 @@ public class Person {
 
     public Person(int id) {
         this.id = id;
-        
+
         this.arrivalTime = Main.currentTime.getCurrentTime();
         Random randy = new Random();
 
-        if(this.arrivalTime+MIN_STAY >= Main.ParkHours) {
-        	this.setMinStay(Main.ParkHours);
+        if(this.arrivalTime+MIN_STAY >= Main.parkHours) {
+            this.setMinStay(Main.parkHours);
         }
         else {
-        	this.setMinStay(randy.nextInt(this.arrivalTime+60, Main.ParkHours));
+            this.setMinStay(randy.nextInt(this.arrivalTime+60, Main.parkHours));
         }
-        
-        this.setMaxStay(randy.nextInt(this.minStay, Main.ParkHours));
-        
+
+        this.setMaxStay(randy.nextInt(this.minStay, Main.parkHours));
+
         this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
         this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
         this.setBalkPoint(NO_BALKPOINT);
@@ -87,7 +90,7 @@ public class Person {
 //     public void setDurationOfStay(int durationOfStay) {
 //         this.durationOfStay = durationOfStay;
 //     }
-    
+
     public int getMinStay(){
         return this.minStay;
     }
@@ -95,23 +98,23 @@ public class Person {
     public void setMinStay(int minStay){
         this.minStay = minStay;
     }
-    
+
     public int getMaxStay(){
         return this.maxStay;
     }
-    
+
     public void setMaxStay(int maxStay){
         this.maxStay = maxStay;
     }
-    
+
     public int getBalkPoint(){
         return this.balkPoint;
     }
-    
+
     public void setBalkPoint(int balkPoint){
         this.balkPoint = balkPoint;
     }
-    
+
     public boolean isWantsPopularRides() {
         return wantsPopularRides;
     }
@@ -149,7 +152,7 @@ public class Person {
     }
 
     public Attraction pickAttraction(){
-        return null;   
+        return null;
     }
 
     @Override
@@ -159,7 +162,7 @@ public class Person {
 
         for (int i = 0; i < this.ridesVisited.size(); i++) {
             Attraction a = this.ridesVisited.get(i);
-            
+
             if (i != this.ridesVisited.size() - 1) {
                 toReturn += a.getName() + ", ";
             } else {
@@ -176,13 +179,13 @@ public class Person {
         return toReturn;
     }
 
-     public boolean hasFastPass() {
-    	if(numFastPasses() > 0) {
-    		return true;
-    	}
-    	return false;
+    public boolean hasFastPass() {
+        if(numFastPasses() > 0) {
+            return true;
+        }
+        return false;
     }
-    
+
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             System.out.println(new Person(i));
