@@ -2,10 +2,10 @@ package assignment;
 
 public class Main
 {
+    public static Time currentTime = new Time();
 
     public static void main(String[] args)
     {
-        Time day = new Time();
         int duration = 480; //8 hours
 
         int fastPassUsage = 0; //for finding average fastpass usage
@@ -21,7 +21,7 @@ public class Main
         Person test = new Person();
 
 
-        while (day.getCurrentTime() <= duration)
+        while (currentTime.getCurrentTime() <= duration)
         {
             //people enter park - list of people (random number)
              /*
@@ -40,7 +40,7 @@ public class Main
                 if (!ride.isCurrentlyRunning() && ride.getCurrentlyInLine() > 0)
                 {
                     ride.startRide(); //puts people on the ride to capacity
-                    ride.setRideStartTime(day.getCurrentTime());
+                    ride.setRideStartTime(currentTime.getCurrentTime());
                 }
                 //pop all people off the ride
                 //pick attraction for people who could be leaving
@@ -60,7 +60,7 @@ public class Main
 
             //wait times change/calculations
             //go on rides
-            day.setCurrentTime(day.getCurrentTime() + 5); //5 minutes pass
+            currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
 
         //Population
