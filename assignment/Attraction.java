@@ -17,6 +17,7 @@ public class Attraction implements Comparable<Attraction> {
     private int duration;
     private int rideStartTime;
     private int currentlyInLine;
+    private int waitTime;
     // TODO: Add currently in regular line, fast line
 
     public Attraction(String name, int popularityScore, int capacity, int duration) {
@@ -156,6 +157,9 @@ public class Attraction implements Comparable<Attraction> {
 
                 // Put person on ride
                 this.onRide[seatsFilled] = p;
+
+                // Update wait time of ride
+                this.setWaitTime(Main.currentTime.getCurrentTime());
 
                 seatsFilled++;
                 this.currentlyInLine--;
