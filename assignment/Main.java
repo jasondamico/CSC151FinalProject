@@ -38,6 +38,7 @@ public class Main
 
         Park codeLand = new Park("Code Land!", listofRides);
 
+        // Adding initial people to park
         ArrayList<Person> customers = new ArrayList<>();
         for (int i = 0; i < population; i++)
         {
@@ -86,6 +87,9 @@ public class Main
                     i++;
                 }
             }
+
+            System.out.println(codeLand);
+
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
 
