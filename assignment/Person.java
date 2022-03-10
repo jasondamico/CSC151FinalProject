@@ -29,6 +29,9 @@ public class Person {
         this.setBalkPoint(NO_BALKPOINT);
         this.setWantsMostRides(false);
         this.setWantsPopularRides(false);
+        this.arrivalTime = Main.currentTime.getCurrentTime();
+        this.minStay = this.arrivalTime;
+        this.maxStay = MAX_STAY;
         
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
@@ -37,9 +40,19 @@ public class Person {
 
     public Person(int id) {
         this.id = id;
+        
+        this.arrivalTime = Main.currentTime.getCurrentTime();
+        Random randy = new Random();
 
-        this.setMinStay((int) (STAY_RANGE * Math.random()) + MIN_STAY);
-        this.setMaxStay(MAX_STAY);
+        if(this.arrivalTime+MIN_STAY >= Main.ParkHours) {
+        	this.setMinStay(Main.ParkHours);
+        }
+        else {
+        	this.setMinStay(randy.nextInt(this.arrivalTime+60, Main.ParkHours));
+        }
+        
+        this.setMaxStay(randy.nextInt(this.minStay, Main.ParkHours));
+        
         this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
         this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
         this.setBalkPoint(NO_BALKPOINT);
