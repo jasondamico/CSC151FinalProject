@@ -68,6 +68,7 @@ public class Person {
         this.setBalkPoint(NO_BALKPOINT);
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
+        this.waitTimes = new Stack<>();
     }
 
     public Person(int id, int minStay, int maxStay, int balkPoint, boolean wantsPopularRides, boolean wantsMostRides) {
