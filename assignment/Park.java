@@ -80,7 +80,7 @@ public class Park {
      * @return Attraction to queue person p into, or null for the person to leave the park
      */
     public Attraction pickAttraction(Person p, ArrayList<Attraction> attractions) {
-    	if(time >= p.getMaxStay()) {
+    	if(Main.currentTime.getCurrentTime() >= p.getMaxStay()) {
     		return null;
     	}
     	if(p.hasFastPass()) {
@@ -105,7 +105,7 @@ public class Park {
     			else {
     				return mostPopularShortestWaitTime;
     			}
-    			if(p.getMinStay() < time) {
+    			if(p.getMinStay() < Main.currentTime.getCurrentTime()) {
     				//assertion: attractions is sorted greatest to least by popularity
     				return attractions.get(0);
     			}
@@ -117,7 +117,7 @@ public class Park {
 						return attractions.get(i);
 					}
 				}
-    			if(p.getMinStay() < time) {
+    			if(p.getMinStay() < Main.currentTime.getCurrentTime()) {
     				//person hasn't stayed late enough, they suck it up and go on the ride they most desire
     				return attractions.get(0);
     			}
@@ -125,7 +125,7 @@ public class Park {
     		}
     		else if(p.isWantsMostRides()) {
     			if(this.getMinWaitTime(attractions).getWaitTime() > p.getBalkPoint()) {
-    				if(p.getMinStay() < time){
+    				if(p.getMinStay() < Main.currentTime.getCurrentTime()){
     					return this.getMinWaitTime(attractions);
     				}
     				return null;
@@ -134,10 +134,8 @@ public class Park {
     				return this.getMinWaitTime(attractions);
     			}
     		}
-    		else {
-    			return attractions.get((int) Math.random() * attractions.size());
-    		}
     	}
+		return attractions.get((int) Math.random() * attractions.size());
     }
 
     public String toString() {
