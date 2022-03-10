@@ -152,7 +152,7 @@ public class Attraction implements Comparable<Attraction> {
                 }
 
                 // Set ending wait time of rider leaving queue
-                p.getLastWaitTime().setEndWait(Main.currentTime.getCurrentTime());
+                p.peekLastWaitTime().setEndWait(Main.currentTime.getCurrentTime());
 
                 // Put person on ride
                 this.onRide[seatsFilled] = p;

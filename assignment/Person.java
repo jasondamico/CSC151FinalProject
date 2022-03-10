@@ -1,6 +1,7 @@
 package assignment;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Random;
 import java.util.Stack;
 import java.lang.Math;
@@ -149,8 +150,20 @@ public class Person {
         this.waitTimes.add(waitTime);
     }
 
-    public WaitTime getLastWaitTime() {
-        return this.waitTimes.peek();
+    public WaitTime peekLastWaitTime() {
+        try {
+            return this.waitTimes.peek();
+        } catch (EmptyStackException e) {
+            return null;
+        }
+    }
+
+    public WaitTime popLastWaitTime() {
+        try {
+            return this.waitTimes.pop();
+        } catch (EmptyStackException e) {
+            return null;
+        }
     }
 
     public FastPass removeFastPass() {
