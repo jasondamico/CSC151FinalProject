@@ -153,6 +153,14 @@ public class Park {
 		return attractions.get((int) Math.random() * attractions.size());
     }
 
+	public ArrayList<Person> getDoneForDay() {
+		return this.doneForDay;
+	}
+
+	public void addToDoneForDay(Person p) {
+		this.doneForDay.add(p);
+	}
+
     public String toString() {
         String toReturn = "Welcome to " + this.getName() + "! Our attractions are as follows:\n\n";
         
