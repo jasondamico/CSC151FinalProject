@@ -1,5 +1,6 @@
 package assignment;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -103,6 +104,7 @@ public class Attraction implements Comparable<Attraction> {
 
         // Initialize waitTime value for person
         person.addWaitTime(new WaitTime(Main.currentTime.getCurrentTime()));
+        this.setWaitTime(Main.currentTime.getCurrentTime());
 
         this.currentlyInLine++;
     }
@@ -223,4 +225,9 @@ public class Attraction implements Comparable<Attraction> {
     public static void main(String[] args) {
         System.out.println(new Attraction("Foo", 10, 15, 5));
     }
+    
+    public ArrayList<Person> closeAttraction(){
+    	return new ArrayList<Person>(this.regular);
+    }
+    
 }
