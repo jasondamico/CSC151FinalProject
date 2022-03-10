@@ -18,6 +18,7 @@ public class Person {
     private ArrayList<Attraction> ridesVisited;
     private ArrayList<FastPass> fastPasses;
     private int balkPoint;
+    private Stack<WaitTime> waitTimes;
 
     private final int NO_BALKPOINT = 10000;
     private final int MAX_STAY = 480;
@@ -38,6 +39,7 @@ public class Person {
 
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
+        this.waitTimes = new Stack<>();
         this.balkPoint = 0;
     }
 
@@ -137,6 +139,14 @@ public class Person {
 
     public void addFastPass(FastPass fp) {
         this.fastPasses.add(fp);
+    }
+
+    public void addWaitTime(WaitTime waitTime) {
+        this.waitTimes.add(waitTime);
+    }
+
+    public WaitTime getLastWaitTime() {
+        return this.waitTimes.peek();
     }
 
     public FastPass removeFastPass() {
