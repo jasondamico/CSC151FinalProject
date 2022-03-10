@@ -185,7 +185,8 @@ public class Attraction implements Comparable<Attraction> {
             this.setCurrentlyRunning(false);
             return leavingRiders;
         } else {
-            return null;
+            // Assertion: ride has not finished
+            return new Person[0];
         }
     }
 
