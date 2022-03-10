@@ -95,7 +95,7 @@ public class Park {
      * @return Attraction to queue person p into, or null for the person to leave the park
      */
     public Attraction pickAttraction(Person p, ArrayList<Attraction> attractions) {
-    	if(Main.currentTime.getCurrentTime() >= p.getMaxStay()) {
+    	if(Main.currentTime.getCurrentTime() >= Main.parkHours) {
     		return null;
     	}
     	if(p.hasFastPass()) {
@@ -122,7 +122,7 @@ public class Park {
     			}
     			if(p.getMinStay() < Main.currentTime.getCurrentTime()) {
     				//assertion: attractions is sorted greatest to least by popularity
-    				return attractions.get(0);
+    				return mostPopularShortestWaitTime;
     			}
     			return null;
     		}
@@ -151,6 +151,7 @@ public class Park {
     		}
     	}
 		return attractions.get((int) Math.random() * attractions.size());
+//    	return null;
     }
 
 	public ArrayList<Person> getDoneForDay() {
