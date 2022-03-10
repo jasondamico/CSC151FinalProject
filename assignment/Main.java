@@ -44,7 +44,14 @@ public class Main
             Person guy = new Person(i);
             customers.add(guy);
 
-            codeLand.pickAttraction(guy, codeLand.getAttractions());
+            Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+            
+            if (personsChoice != null) {
+                personsChoice.addPersonToLine(guy, guy.hasFastPass());
+            } else {
+                // Attraction is null, removes person from park
+                codeLand.addToDoneForDay(guy);
+            }
         }
 
         while (currentTime.getCurrentTime() <= parkHours)
@@ -56,9 +63,27 @@ public class Main
                     ride.startRide(); //puts people on the ride to capacity
                     ride.setRideStartTime(currentTime.getCurrentTime());
                 }
-                for (Person guy : ride.checkRuntime(currentTime.getCurrentTime()))
-                {
-                    codeLand.pickAttraction(guy, codeLand.getAttractions()); //removes people from park is this is null
+
+                // Check ride
+                Person[] peopleOffRide = ride.checkRuntime(currentTime.getCurrentTime());
+                int i = 0;
+                boolean hasMoreRiders = true;
+
+                while (i < peopleOffRide.length && hasMoreRiders) {
+                    Person guy = peopleOffRide[i];
+
+                    if (peopleOffRide != null && guy != null) {    
+                        Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+    
+                        if (personsChoice != null) {
+                            personsChoice.addPersonToLine(guy, guy.hasFastPass());
+                        } else {
+                            // Attraction is null, removes person from park
+                            codeLand.addToDoneForDay(guy);
+                        }
+                    }
+
+                    i++;
                 }
             }
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
