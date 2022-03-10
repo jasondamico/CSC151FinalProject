@@ -1,5 +1,8 @@
 package assignment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Main
 {
     public static Time currentTime = new Time();
@@ -15,7 +18,12 @@ public class Main
         Attraction att3 = new Attraction("Linked List Log Ride", 3, 6, 8);
         Attraction att4 = new Attraction("The Tree Tower", 4, 16, 5);
 
-        Attraction[] listofRides = {att1, att2, att3, att4};
+        ArrayList<Attraction> listofRides = new ArrayList<>();
+        listofRides.add(att1);
+        listofRides.add(att2);
+        listofRides.add(att3);
+        listofRides.add(att4);
+        
         Park codeLand = new Park("Code Land!", listofRides);
 
         Person test = new Person();
