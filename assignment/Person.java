@@ -21,9 +21,7 @@ public class Person {
     private Stack<WaitTime> waitTimes;
 
     private final int NO_BALKPOINT = 10000;
-    private final int MAX_STAY = 480;
-    private final int MIN_STAY = 120;
-    private final int STAY_RANGE = 360;
+    private final int MIN_STAY = 60;
 
     public Person() 
     {
@@ -35,7 +33,7 @@ public class Person {
         this.setWantsPopularRides(false);
         this.arrivalTime = Main.currentTime.getCurrentTime();
         this.minStay = this.arrivalTime;
-        this.maxStay = MAX_STAY;
+        this.maxStay = Main.parkHours;
 
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
@@ -47,16 +45,22 @@ public class Person {
         this.id = id;
 
         this.arrivalTime = Main.currentTime.getCurrentTime();
-        Random randy = new Random();
 
         if(this.arrivalTime+MIN_STAY >= Main.parkHours) {
             this.setMinStay(Main.parkHours);
+            this.setMaxStay(Main.parkHours);
         }
         else {
-            this.setMinStay(randy.nextInt(this.arrivalTime+60, Main.parkHours));
-        }
+            // Calculating hours left to stay past minimum stay time
+            int hoursLeft = Main.parkHours - Main.currentTime.getCurrentTime() - MIN_STAY;
 
-        this.setMaxStay(randy.nextInt(this.minStay, Main.parkHours));
+            // Min stay time is at least 60 minutes after opening, could be maximum of closing time
+            int minStayTime = (int) (hoursLeft * Math.random()) + this.arrivalTime  + MIN_STAY;
+            this.setMinStay(minStayTime);
+
+            // Max stay will be when the park closes (i.e., everyone leaves when park closes)
+            this.setMaxStay(Main.parkHours);
+        }
 
         this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
         this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
