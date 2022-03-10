@@ -65,7 +65,7 @@ public class Person {
 
         this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
         this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
-        this.setBalkPoint(NO_BALKPOINT);
+        this.setBalkPoint((int)(Math.random()*240));
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
         this.waitTimes = new Stack<>();
@@ -169,7 +169,9 @@ public class Person {
 
     public FastPass removeFastPass() {
         if (this.fastPasses.size() > 0) {
-            return this.fastPasses.remove(fastPasses.size() - 1);
+        	FastPass toBeUsed = fastPasses.get(0);
+            this.fastPasses.remove(fastPasses.get(0));
+            return toBeUsed;
         } else {
             return null;
         }
