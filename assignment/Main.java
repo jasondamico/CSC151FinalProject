@@ -89,6 +89,20 @@ public class Main
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
 
+        ArrayList<Person> doneForDay = codeLand.getDoneForDay();
+        int totalTimeWaited = 0;
 
+        for (int i = 0; i < doneForDay.size(); i++) {
+            Person p = doneForDay.get(i);
+
+            while (p.peekLastWaitTime() != null) {
+                WaitTime rideWaitTime = p.popLastWaitTime();
+                int waitTime = rideWaitTime.getEndWait() - rideWaitTime.getStartWait();
+
+                totalTimeWaited += waitTime;
+            }
+        }
+
+        System.out.println(totalTimeWaited / doneForDay.size());
     }
 }
