@@ -163,7 +163,7 @@ public class Park {
 	}
 
     public String toString() {
-        String toReturn = "Welcome to " + this.getName() + "! Our attractions are as follows:\n\n";
+        String toReturn = "Welcome to " + this.getName() + "! TIME: " + Main.currentTime.getCurrentTime() + "\nOur attractions are as follows:\n\n";
         
         for (Attraction atr : this.attractions) {
             toReturn += atr + "\n";
