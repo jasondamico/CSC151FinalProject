@@ -197,7 +197,7 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     public int setWaitTime(int currentTime) {
-        int lineWait = (this.currentlyInLine / this.getCapacity()) * this.getDuration();
+        int lineWait = this.getDuration() + (this.currentlyInLine / this.getCapacity()) * this.getDuration();
         // int untilRideIsDone = this.getUntilRideDone();
         // this.waitTime = untilRideIsDone + lineWait;
         // return waitTime;
