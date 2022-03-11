@@ -3,6 +3,7 @@ package assignment;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Simulations
 {
@@ -26,7 +27,7 @@ public class Simulations
     {
     	currentTime.setCurrentTime(0);
         int fastPassUsage = 0; //for finding average fastpass usage
-        int population = 100;
+        int population = 20;
 
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
         Attraction att2 = new Attraction("The Queue Coaster", 5, 8, 5);
@@ -108,27 +109,35 @@ public class Simulations
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
-
+        ArrayList<GarbageCollector> fineAdditions = new ArrayList<>();
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
-
+            int timeWaited = 0;
             while (p.peekLastWaitTime() != null) {
                 WaitTime rideWaitTime = p.popLastWaitTime();
                 int waitTime = rideWaitTime.getEndWait() - rideWaitTime.getStartWait();
-
+                if(waitTime > 0) {
+                	timeWaited += waitTime;
+                }
                 totalTimeWaited += waitTime;
             }
+            fineAdditions.add(new GarbageCollector(p.getId(), timeWaited));
         }
         
-        System.out.println(totalTimeWaited);
-        System.out.println(doneForDay.size());
-        System.out.println(totalTimeWaited / doneForDay.size());
+        System.out.println("Total time waited:" + " " + totalTimeWaited);
+        System.out.println("Total number of people: " + doneForDay.size());
+        System.out.println("Average time waited: " + (totalTimeWaited / doneForDay.size()));
+        
+//        Collections.sort(fineAdditions);
+//        for(int i = 0; i < fineAdditions.size(); i++) {
+//        	System.out.println(fineAdditions.get(i).getTotalTimeWaited());
+//        }
     }
     
     public static void FastPassSimulation() {
     	
     	int fastPassUsage = 0; //for finding average fastpass usage
-        int population = 100;
+        int population = 20;
     	currentTime.setCurrentTime(0);
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
         Attraction att2 = new Attraction("The Queue Coaster", 5, 8, 5);
@@ -217,21 +226,28 @@ public class Simulations
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
-
+        ArrayList<GarbageCollector> fineAdditions = new ArrayList<>();
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
-
+            int timeWaited = 0;
             while (p.peekLastWaitTime() != null) {
                 WaitTime rideWaitTime = p.popLastWaitTime();
                 int waitTime = rideWaitTime.getEndWait() - rideWaitTime.getStartWait();
-
+                if(waitTime > 0) {
+                	timeWaited += waitTime;
+                }
                 totalTimeWaited += waitTime;
             }
+            fineAdditions.add(new GarbageCollector(p.getId(), timeWaited));
         }
         
-        System.out.println(totalTimeWaited);
-        System.out.println(doneForDay.size());
-        System.out.println(totalTimeWaited / doneForDay.size());
+        System.out.println("Total time waited:" + " " + totalTimeWaited);
+        System.out.println("Total number of people: " + doneForDay.size());
+        System.out.println("Average time waited: " + (totalTimeWaited / doneForDay.size()));
+        
+//        Collections.sort(fineAdditions);
+//        for(int i = 0; i < fineAdditions.size(); i++) {
+//        	System.out.println(fineAdditions.get(i).getTotalTimeWaited());
+//        }
     }
-    
 }
