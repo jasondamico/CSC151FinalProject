@@ -104,9 +104,10 @@ public class Attraction implements Comparable<Attraction> {
 
         // Initialize waitTime value for person
         person.addWaitTime(new WaitTime(Simulations.currentTime.getCurrentTime()));
-        this.setWaitTime(Simulations.currentTime.getCurrentTime());
 
         this.currentlyInLine++;
+
+        this.setWaitTime(Simulations.currentTime.getCurrentTime());
     }
 
     public int numPeopleOnRide() {
@@ -160,11 +161,13 @@ public class Attraction implements Comparable<Attraction> {
                 // Put person on ride
                 this.onRide[seatsFilled] = p;
 
-                // Update wait time of ride
-                this.setWaitTime(Simulations.currentTime.getCurrentTime());
+                p.addRideVisited(this);
 
                 seatsFilled++;
                 this.currentlyInLine--;
+
+                // Update wait time of ride
+                this.setWaitTime(Simulations.currentTime.getCurrentTime());
             } else {
                 // Assertion: both queues are empty
                 queuesEmpty = true;
@@ -193,20 +196,30 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     public int setWaitTime(int currentTime) {
-        int untilRideIsDone = currentTime - this.getRideStartTime();
-        int lineWait = this.currentlyInLine / this.getCapacity();
-        this.waitTime = untilRideIsDone + lineWait;
-        return waitTime;
+        int lineWait = (this.currentlyInLine / this.getCapacity()) * this.getDuration();
+        // int untilRideIsDone = this.getUntilRideDone();
+        // this.waitTime = untilRideIsDone + lineWait;
+        // return waitTime;
+
+        this.waitTime = lineWait;
+        return lineWait;
     }
     
     public int getWaitTime() {
     	return this.waitTime;
     }
 
+    public int getUntilRideDone() {
+        int endTime = this.getDuration() + this.getRideStartTime();
+
+        return endTime - Simulations.currentTime.getCurrentTime();
+    }
+
     @Override
     public String toString() {
         String toReturn = this.getName() + ":\n========================\n";
         toReturn += "Capacity: " + this.getCapacity() + "\n";
+        toReturn += "Wait time: " + this.getWaitTime() + "\n";
         toReturn += "Popularity score: " + this.getPopularityScore() + "\n";
         toReturn += "Ride duration: " + this.getDuration() + "\n";
 
