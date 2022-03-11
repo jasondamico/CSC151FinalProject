@@ -58,6 +58,9 @@ public class Person {
 
             // Min stay time is at least 60 minutes after opening, could be maximum of closing time
             int minStayTime = (int) (hoursLeft * Math.random()) + this.arrivalTime  + MIN_STAY;
+            if(minStay > Simulations.parkHours) {
+            	minStay = Simulations.parkHours;
+            }
             this.setMinStay(minStayTime);
 
             // Max stay will be when the park closes (i.e., everyone leaves when park closes)
