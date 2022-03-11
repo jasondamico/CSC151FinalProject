@@ -227,7 +227,7 @@ public class Attraction implements Comparable<Attraction> {
 
         for (int i = 0; i < this.numPeopleOnRide(); i++) {
             Person p = this.onRide[i];
-            toReturn += "\t" + p + "\n\n";
+            toReturn += "\t" + p.toString().replaceAll("\n", "\n\t") + "\n\n";
         }
 
         toReturn += "Total People in queue: " + this.getCurrentlyInLine() + "\n\n";
