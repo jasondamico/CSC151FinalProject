@@ -20,6 +20,7 @@ public class Person {
     private ArrayList<FastPass> fastPasses;
     private int balkPoint;
     private Stack<WaitTime> waitTimes;
+    private boolean isPremium;
 
     private final int NO_BALKPOINT = 10000;
     private final int MIN_STAY = 60;
@@ -214,6 +215,14 @@ public class Person {
             return true;
         }
         return false;
+    }
+    
+    public boolean getIsPremium() {
+    	return this.isPremium;
+    }
+    
+    public void setIsPremium(boolean isPremium) {
+    	this.isPremium = isPremium;
     }
 
     public static void main(String[] args) {
