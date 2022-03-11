@@ -3,10 +3,10 @@ package assignment;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Main
+public class Simulations
 {
     public static Time currentTime = new Time();
-    public static int parkHours = 480; //8 hours
+    public static int parkHours = 40; //8 hours
 
     private int population;
 
@@ -20,11 +20,11 @@ public class Main
         this.population = population;
     }
 
-    public static void main(String[] args)
+    public static void noFastPassSimulation()
     {
     	
         int fastPassUsage = 0; //for finding average fastpass usage
-        int population = 10000;
+        int population = 10;
 
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
         Attraction att2 = new Attraction("The Queue Coaster", 5, 8, 5);

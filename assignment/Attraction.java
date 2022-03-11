@@ -103,8 +103,8 @@ public class Attraction implements Comparable<Attraction> {
         }
 
         // Initialize waitTime value for person
-        person.addWaitTime(new WaitTime(Main.currentTime.getCurrentTime()));
-        this.setWaitTime(Main.currentTime.getCurrentTime());
+        person.addWaitTime(new WaitTime(Simulations.currentTime.getCurrentTime()));
+        this.setWaitTime(Simulations.currentTime.getCurrentTime());
 
         this.currentlyInLine++;
     }
@@ -155,13 +155,13 @@ public class Attraction implements Comparable<Attraction> {
                 }
 
                 // Set ending wait time of rider leaving queue
-                p.peekLastWaitTime().setEndWait(Main.currentTime.getCurrentTime());
+                p.peekLastWaitTime().setEndWait(Simulations.currentTime.getCurrentTime());
 
                 // Put person on ride
                 this.onRide[seatsFilled] = p;
 
                 // Update wait time of ride
-                this.setWaitTime(Main.currentTime.getCurrentTime());
+                this.setWaitTime(Simulations.currentTime.getCurrentTime());
 
                 seatsFilled++;
                 this.currentlyInLine--;
