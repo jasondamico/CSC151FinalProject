@@ -121,7 +121,7 @@ public class Park {
     			else {
     				return mostPopularShortestWaitTime;
     			}
-    			if(p.getMinStay() >= Simulations.currentTime.getCurrentTime()) {
+    			if(p.getMinStay() > Simulations.currentTime.getCurrentTime()) {
     				//assertion: attractions is sorted greatest to least by popularity
     				return mostPopularShortestWaitTime;
     			}
@@ -133,7 +133,7 @@ public class Park {
 						return attractions.get(i);
 					}
 				}
-    			if(p.getMinStay() >= Simulations.currentTime.getCurrentTime()) {
+    			if(p.getMinStay() > Simulations.currentTime.getCurrentTime()) {
     				//person hasn't stayed late enough, they suck it up and go on the ride they most desire
     				return attractions.get(0);
     			}
@@ -141,7 +141,7 @@ public class Park {
     		}
     		else if(p.isWantsMostRides()) {
     			if(this.getMinWaitTime(attractions).getWaitTime() > p.getBalkPoint()) {
-    				if(p.getMinStay() >= Simulations.currentTime.getCurrentTime()){
+    				if(p.getMinStay() > Simulations.currentTime.getCurrentTime()){
     					return this.getMinWaitTime(attractions);
     				}
     				return null;
