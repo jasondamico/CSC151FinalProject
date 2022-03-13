@@ -2,6 +2,10 @@ package assignment;
 
 import java.util.Stack;
 
+/*
+The FastPass class creates and object FastPass which is simply an object that allows a person to skip to the front of a line,
+sometimes a fastpass can only be used on a specific ride.
+ */
 public class FastPass
 {
     private Attraction passAttraction;
@@ -66,5 +70,5 @@ public class FastPass
         passes.add(pass3);
 
         System.out.println(passes);
-    } 
+    }
 }
