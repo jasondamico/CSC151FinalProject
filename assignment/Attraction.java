@@ -35,10 +35,10 @@ public class Attraction implements Comparable<Attraction> {
      * @param duration how long the ride runs for
      */
     public Attraction(String name, int popularityScore, int capacity, int duration) {
-        this.name = name;
-        this.popularityScore = popularityScore;
-        this.capacity = capacity;
-        this.duration = duration;
+        this.setName(name);
+        this.setPopularityScore(popularityScore);
+        this.setCapacity(capacity);
+        this.setDuration(duration);
 
         // Values initialized to empty values, do not take argument values
         this.regular = new LinkedList<>();
@@ -62,7 +62,11 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     private void setPopularityScore(int popularityScore) {
-        this.popularityScore = popularityScore;
+        if (popularityScore >= 1 && popularityScore <= 5) {
+            this.popularityScore = popularityScore;
+        } else {
+            throw new IllegalArgumentException("Popularity score must be between 1 and 5.");
+        }
     }
 
     public int getCapacity() {
@@ -70,7 +74,23 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     private void setCapacity(int capacity) {
-        this.capacity = capacity;
+        if (capacity > 0) {
+            this.capacity = capacity;
+        } else {
+            throw new IllegalArgumentException("Capacity must be greater than or equal to 1.");
+        }
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    private void setDuration(int duration) {
+        if (duration > 0) {
+            this.duration = duration;
+        } else {
+            throw new IllegalArgumentException("Duration must be greater than or equal to 1.");
+        }
     }
 
     /**
@@ -83,14 +103,6 @@ public class Attraction implements Comparable<Attraction> {
 
     private void setCurrentlyRunning(boolean currentlyRunning) {
         this.currentlyRunning = currentlyRunning;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    private void setDuration(int duration) {
-        this.duration = duration;
     }
 
     /**
