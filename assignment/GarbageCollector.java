@@ -3,10 +3,13 @@ package assignment;
 public class GarbageCollector implements Comparable<GarbageCollector>{
 	private int id;
 	private int totalTimeWaited;
+	private int numberOfRidesRidden;
 	
-	public GarbageCollector(int id, int totalTimeWaited) {
+	//his name is randy
+	public GarbageCollector(int id, int totalTimeWaited, int numberOfRidesRidden) {
 		this.id = id;
 		this.totalTimeWaited = totalTimeWaited;
+		this.numberOfRidesRidden = numberOfRidesRidden;
 	}
 	
 	public String toString() {
@@ -40,4 +43,10 @@ public class GarbageCollector implements Comparable<GarbageCollector>{
 	public void setTotalTimeWaited(int totalTimeWaited) {
 		this.totalTimeWaited = totalTimeWaited;
 	}
+	
+	public int getNumberOfRidesRidden() {
+		return this.numberOfRidesRidden;
+	}
+	
+	
 }
