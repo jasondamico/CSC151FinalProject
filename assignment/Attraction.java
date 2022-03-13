@@ -252,10 +252,11 @@ public class Attraction implements Comparable<Attraction> {
      * @return
      */
     public int getWaitTime() {
-        int lineWait = this.getDuration() + (this.currentlyInLine / this.getCapacity()) * this.getDuration();
-        // int untilRideIsDone = this.getUntilRideDone();
-        // this.waitTime = untilRideIsDone + lineWait;
-        // return waitTime;
+        int lineWait = (this.currentlyInLine / this.getCapacity()) * this.getDuration();
+        
+        if (this.isCurrentlyRunning()) {
+            return lineWait + this.getUntilRideDone();
+        }
 
         return lineWait;
     }
@@ -267,7 +268,10 @@ public class Attraction implements Comparable<Attraction> {
     public int getUntilRideDone() {
         int endTime = this.getDuration() + this.getRideStartTime();
 
-        return endTime - Simulations.currentTime.getCurrentTime();
+        int calc = endTime - Simulations.currentTime.getCurrentTime();
+
+        // Returns 0 if the end time is less than the current time, i.e., if the ride end time has already passed
+        return Math.max(calc, 0);
     }
 
 
