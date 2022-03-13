@@ -15,17 +15,21 @@ public class Attraction implements Comparable<Attraction> {
 
     // PRIVATE INSTANCE VARIABLES
 
+    // Ride characteristics
     private String name;
-    private Queue<Person> regular;
-    private Queue<Person> fast;
+    private int duration;
     private int popularityScore;
     private int capacity;
+
+    // Storage of riders
+    private Queue<Person> regular;
+    private Queue<Person> fast;
     private Person[] onRide;
+
+    // Tracking relevant information about ride
     private boolean currentlyRunning;
-    private int duration;
     private int rideStartTime;
     private int currentlyInLine;
-    // TODO: Add currently in regular line, fast line
 
     /** Constructor of Attraction
      * @param name Name of the attraction
@@ -316,7 +320,6 @@ public class Attraction implements Comparable<Attraction> {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (regular != null ? !regular.equals(that.regular) : that.regular != null) return false;
         if (fast != null ? !fast.equals(that.fast) : that.fast != null) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(onRide, that.onRide);
     }
 
@@ -340,6 +343,10 @@ public class Attraction implements Comparable<Attraction> {
         String toReturn = this.getName() + ":\n========================\n";
         toReturn += "Capacity: " + this.getCapacity() + "\n";
         toReturn += "Wait time: " + this.getWaitTime() + "\n";
+        toReturn += "Ride currently running: " + this.isCurrentlyRunning() + "\n";
+        if(this.isCurrentlyRunning()) {
+            toReturn += "Time until ride finished: "  + this.getUntilRideDone() + "\n";
+        }
         toReturn += "Popularity score: " + this.getPopularityScore() + "\n";
         toReturn += "Ride duration: " + this.getDuration() + "\n";
 
