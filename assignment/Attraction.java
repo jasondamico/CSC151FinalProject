@@ -295,6 +295,8 @@ public class Attraction implements Comparable<Attraction> {
             }
         }
 
+        this.setCurrentlyRunning(false);
+
         return peopleLeavingRide;
     }
 
