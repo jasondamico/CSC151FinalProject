@@ -1,4 +1,3 @@
-
 package assignment;
 
 import java.util.ArrayList;
@@ -6,6 +5,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/*
+The Attraction Class creates a ride, given the information of its name, popularity (1-5 stars),
+how many people the ride can hold (capacity), and how long it takes for the ride to run fully (duration).
+
+Every park should have a list of attractions, this is where they get made.
+ */
 public class Attraction implements Comparable<Attraction> {
 
     // PRIVATE INSTANCE VARIABLES
@@ -261,7 +266,7 @@ public class Attraction implements Comparable<Attraction> {
 
         // Add all people who were on the ride
         for (int i = 0; i < this.onRide.length; i++) {
-            Person p = this.onRide[i]; 
+            Person p = this.onRide[i];
 
             if (p == null) {
                 break;
