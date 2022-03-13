@@ -1,5 +1,8 @@
 package assignment;
 
+/*
+The GarbageCollector class effectively holds a Person's information as it is being collected, so it doesn't get lost
+ */
 public class GarbageCollector implements Comparable<GarbageCollector>{
     private int id;
     private int totalTimeWaited;
@@ -72,5 +75,20 @@ public class GarbageCollector implements Comparable<GarbageCollector>{
         result = 31 * result + totalTimeWaited;
         result = 31 * result + numberOfRidesRidden;
         return result;
-    } 
+    }
+
+    public static void main(String[] args)
+    {
+        GarbageCollector randy = new GarbageCollector(0, 10, 3);
+        GarbageCollector andy = new GarbageCollector(1, 20, 2);
+
+        if (randy.compareTo(andy) != 0)
+        {
+            System.out.println("Randy and Andy aren't the same person");
+        }
+        else
+        {
+            System.out.println("Randy and Andy ARE the same person!");
+        }
+    }
 }
