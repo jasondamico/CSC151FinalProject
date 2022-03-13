@@ -236,7 +236,7 @@ public class Park {
         atr.add(new Attraction("test2", 3, 2, 1));
         atr.add(new Attraction("test3", 6, 3, 4));
 
-        Park p = new Park("Test park", atr);
+        Park p = new Park("Test park", atr); 
 
         System.out.println(p);
     }
