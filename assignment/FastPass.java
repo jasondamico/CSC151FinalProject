@@ -29,6 +29,14 @@ public class FastPass
         this.passAttraction = passAttraction;
     }
 
+    /**
+     * Returns the attraction the fast pass is for. 
+     * @return A reference to the attraction the fast pass is for.
+     */
+    public Attraction getAttraction() {
+        return this.passAttraction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
