@@ -125,7 +125,11 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     public void setCurrentlyInLine(int currentlyInLine) {
-        this.currentlyInLine = currentlyInLine;
+        if (currentlyInLine >= 0) {
+            this.currentlyInLine = currentlyInLine;
+        } else {
+            throw new IllegalArgumentException("Number of people currently in line must be greater than or equal to 0.");
+        }
     }
 
     public void addPersonToLine(Person person, boolean hasFastPass) {
