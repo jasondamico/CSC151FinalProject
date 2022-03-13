@@ -25,7 +25,6 @@ public class Attraction implements Comparable<Attraction> {
     private int duration;
     private int rideStartTime;
     private int currentlyInLine;
-    private int waitTime;
     // TODO: Add currently in regular line, fast line
 
     /** Constructor of Attraction
@@ -114,7 +113,11 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     public void setRideStartTime(int rideStartTime) {
-        this.rideStartTime = rideStartTime;
+        if (rideStartTime >= 0) {
+            this.rideStartTime = rideStartTime;
+        } else {
+            throw new IllegalArgumentException("Ride start time must be greater than or equal to 0.");
+        }
     }
 
     public int getCurrentlyInLine() {
@@ -139,8 +142,6 @@ public class Attraction implements Comparable<Attraction> {
         person.addWaitTime(new WaitTime(Simulations.currentTime.getCurrentTime()));
 
         this.currentlyInLine++;
-
-        this.setWaitTime(Simulations.currentTime.getCurrentTime());
     }
 
     public int numPeopleOnRide() {
@@ -199,9 +200,6 @@ public class Attraction implements Comparable<Attraction> {
 
                 seatsFilled++;
                 this.currentlyInLine--;
-
-                // Update wait time of ride
-                this.setWaitTime(Simulations.currentTime.getCurrentTime());
             } else {
                 // Assertion: both queues are empty
                 queuesEmpty = true;
@@ -236,23 +234,17 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     /**
-     * setWaitTime
-     * sets the current wait time for the ride
-     * @param currentTime
-     * @return current wait time for ride
+     * getWaitTime
+     * Returns the current wait time for the ride based on the current time.
+     * @return
      */
-    public int setWaitTime(int currentTime) {
+    public int getWaitTime() {
         int lineWait = this.getDuration() + (this.currentlyInLine / this.getCapacity()) * this.getDuration();
         // int untilRideIsDone = this.getUntilRideDone();
         // this.waitTime = untilRideIsDone + lineWait;
         // return waitTime;
 
-        this.waitTime = lineWait;
         return lineWait;
-    }
-
-    public int getWaitTime() {
-        return this.waitTime;
     }
 
     /**
