@@ -57,8 +57,9 @@ public class Time
     {
         Time minutes = new Time();
         minutes.setCurrentTime(10);
-
-        System.out.println("how many minutes have passed\n" + minutes);
-
+        System.out.println("the time is:\n" + minutes); //10
+        minutes.currentTime += 5; //5 minutes pass
+        System.out.println("what time is it now?:\n" + minutes); //15
+        
     }
-} 
+}
