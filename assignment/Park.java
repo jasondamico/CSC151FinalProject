@@ -3,7 +3,10 @@ package assignment;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/*
+The Park Class creates the Park our customers are visting! Every park should have a list of Attractions, and a name.
+Everything that happens within a park.
+ */
 public class Park {
     private ArrayList<Attraction> attractions;
     private ArrayList<Person> doneForDay;
@@ -236,7 +239,7 @@ public class Park {
         atr.add(new Attraction("test2", 3, 2, 1));
         atr.add(new Attraction("test3", 6, 3, 4));
 
-        Park p = new Park("Test park", atr); 
+        Park p = new Park("Test park", atr);
 
         System.out.println(p);
     }
