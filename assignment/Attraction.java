@@ -319,7 +319,6 @@ public class Attraction implements Comparable<Attraction> {
         result = 31 * result + duration;
         result = 31 * result + rideStartTime;
         result = 31 * result + currentlyInLine;
-        result = 31 * result + waitTime;
         return result;
     }
 
