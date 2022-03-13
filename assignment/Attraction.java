@@ -261,7 +261,7 @@ public class Attraction implements Comparable<Attraction> {
 
         // Add all people who were on the ride
         for (int i = 0; i < this.onRide.length; i++) {
-            Person p = this.onRide[i];
+            Person p = this.onRide[i]; 
 
             if (p == null) {
                 break;
