@@ -1,5 +1,8 @@
 package assignment;
 
+/*
+The Time Object holds the overall current time in the park, and is referenced throughout various other classes
+ */
 public class Time
 {
     private int currentTime;
@@ -60,6 +63,5 @@ public class Time
         System.out.println("the time is:\n" + minutes); //10
         minutes.currentTime += 5; //5 minutes pass
         System.out.println("what time is it now?:\n" + minutes); //15
-        
     }
 }
