@@ -9,7 +9,7 @@ public class WaitTime {
     // PRIVATE INSTANCE VARIABLES
     private int startWait;
     private int endWait;
-
+    
     /**
      * empty constructor
      * sets both startWait and endWait to 0
@@ -36,8 +36,7 @@ public class WaitTime {
         this.setStartWait(time);
         this.setEndWait(0);
     }
-
-
+    
     public int getStartWait() {
         return startWait;
     }
@@ -77,7 +76,7 @@ public class WaitTime {
     public void setEndWait(Time time) {
         this.endWait = time.getCurrentTime();
     }
-
+    
     /**
      * getWaitDuration
      * calculates how long the wait was
