@@ -1,13 +1,25 @@
 package assignment;
 
-public class FastPass {
+public class FastPass
+{
     private Attraction passAttraction;
 
-    public FastPass() {
+    /**
+     * empty constructor
+     * make a FastPass object (a piece of paper, effectively)
+     */
+    public FastPass()
+    {
 
     }
 
-    public FastPass(Attraction passAttraction) {
+    /**
+     * constructor
+     * makes an attraction specific FastPass
+     * @param passAttraction the attraction the FastPass is attached to
+     */
+    public FastPass(Attraction passAttraction)
+    {
         this.passAttraction = passAttraction;
     }
 }
