@@ -1,5 +1,7 @@
 package assignment;
 
+import java.util.InputMismatchException;
+
 /*
 The Time Object holds the overall current time in the park, and is referenced throughout various other classes
  */
@@ -33,7 +35,11 @@ public class Time
      */
     public void setCurrentTime(int currentTime) //main uses this
     {
-        this.currentTime = currentTime;
+        if (currentTime >= 0) {
+            this.currentTime = currentTime;
+        } else {
+            throw new IllegalArgumentException("A positive time value must be passed.");
+        }
     }
 
     @Override
