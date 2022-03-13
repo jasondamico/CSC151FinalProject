@@ -229,11 +229,10 @@ public class Attraction implements Comparable<Attraction> {
     /**
      * checkRuntime
      * Checks if the ride has finished running
-     * @param currentTime
      * @return The people leaving the ride if finished, or an empty list of people if not
      */
-    public Person[] checkRuntime(int currentTime) {
-        if (currentTime == this.getRideStartTime() + this.getDuration()) {
+    public Person[] checkRuntime() {
+        if (Simulations.currentTime.getCurrentTime() >= this.getRideStartTime() + this.getDuration()) {
             // Assertion: ride has finished
             Person[] leavingRiders = this.onRide;
             this.onRide = new Person[capacity];

@@ -80,7 +80,7 @@ public class Simulations
                 }
 
                 // Check ride
-                Person[] peopleOffRide = ride.checkRuntime(currentTime.getCurrentTime());
+                Person[] peopleOffRide = ride.checkRuntime();
                 int i = 0;
                 boolean hasMoreRiders = true;
 
@@ -216,7 +216,7 @@ public class Simulations
                 }
 
                 // Check ride
-                Person[] peopleOffRide = ride.checkRuntime(currentTime.getCurrentTime());
+                Person[] peopleOffRide = ride.checkRuntime();
                 int i = 0;
                 boolean hasMoreRiders = true;
 
