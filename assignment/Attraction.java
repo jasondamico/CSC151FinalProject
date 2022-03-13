@@ -169,6 +169,7 @@ public class Attraction implements Comparable<Attraction> {
     /**
      * startRide Gets people out of the queues and onto the ride, and starts running it
      * Precondition: Attraction is not currently running.
+     * Time complexity: O(n), where n = the capacity of the ride
      */
     public void startRide() {
         int seatsFilled = 0;
@@ -276,6 +277,7 @@ public class Attraction implements Comparable<Attraction> {
      * closeAttraction
      * When the attraction needs to close, take everyone off the ride and out of line
      * @return ArrayList of people leaving the line & the ride
+     * Time complexity: O(n) where n = the number of people in line for the ride and on the ride
      */
     public ArrayList<Person> closeAttraction() {
         // People who were in the lines
