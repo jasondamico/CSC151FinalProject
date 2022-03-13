@@ -1,5 +1,7 @@
 package assignment;
 
+import java.util.Stack;
+
 public class FastPass
 {
     private Attraction passAttraction;
@@ -21,5 +23,48 @@ public class FastPass
     public FastPass(Attraction passAttraction)
     {
         this.passAttraction = passAttraction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FastPass fastPass = (FastPass) o;
+
+        return passAttraction != null ? passAttraction.equals(fastPass.passAttraction) : fastPass.passAttraction == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return passAttraction != null ? passAttraction.hashCode() : 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        if (passAttraction != null)
+        {
+            return "FastPass for " + passAttraction.getName();
+        }
+        else
+        {
+            return "FastPass";
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Stack passes = new Stack();
+        Attraction helloWorld = new Attraction("helloWorld", 5, 10, 5);
+        FastPass pass1 = new FastPass();
+        FastPass pass2 = new FastPass(helloWorld);
+        FastPass pass3 = new FastPass();
+
+        passes.add(pass1);
+        passes.add(pass2);
+        passes.add(pass3);
+
+        System.out.println(passes);
     }
 }
