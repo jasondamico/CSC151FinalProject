@@ -190,10 +190,12 @@ public class Person {
         String toReturn = "PERSON ID: " + this.getId() + "\n";
         toReturn += "RIDES VISITED: ";
 
-        for (int i = 0; i < this.ridesVisited.size(); i++) {
-            Attraction a = this.ridesVisited.get(i);
+        ArrayList<Attraction> ridesRidden = this.getRidesRidden();
 
-            if (i != this.ridesVisited.size() - 1) {
+        for (int i = 0; i < ridesRidden.size(); i++) {
+            Attraction a = ridesRidden.get(i);
+
+            if (i != ridesRidden.size() - 1) {
                 toReturn += a.getName() + ", ";
             } else {
                 toReturn += a.getName();
@@ -226,7 +228,7 @@ public class Person {
     }
 
     public ArrayList<Attraction> getRidesRidden(){
-    	return this.ridesVisited;
+    	return new ArrayList<Attraction>(this.ridesVisited);
     }
     
     public static void main(String[] args) {
