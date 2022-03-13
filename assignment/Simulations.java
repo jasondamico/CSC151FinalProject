@@ -1,10 +1,12 @@
-
 package assignment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/*
+The Simulations Class holds all the simulations that we want to run through and their details
+This is where everything else is used to get results.
+ */
 public class Simulations
 {
     public static Time currentTime = new Time();
@@ -23,10 +25,13 @@ public class Simulations
         this.population = population;
     }
 
+    /**
+     * noFastPassSimulation
+     * The simulation to run in which nobody has fastpasses
+     */
     public static void noFastPassSimulation()
     {
-    	currentTime.setCurrentTime(0);
-        int fastPassUsage = 0; //for finding average fastpass usage
+        currentTime.setCurrentTime(0);
         int population = 300;
 
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
@@ -47,7 +52,7 @@ public class Simulations
         listofRides.add(att7);
 
         Park codeLand = new Park("Code Land!", listofRides);
-        
+
         // Adding initial people to park
         ArrayList<Person> customers = new ArrayList<>();
         for (int i = 0; i < population; i++)
@@ -56,7 +61,7 @@ public class Simulations
             customers.add(guy);
 
             Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
-            
+
             if (personsChoice != null) {
                 personsChoice.addPersonToLine(guy, guy.hasFastPass());
             } else {
@@ -83,9 +88,9 @@ public class Simulations
                 while (i < peopleOffRide.length && hasMoreRiders) {
                     Person guy = peopleOffRide[i];
 
-                    if (peopleOffRide != null && guy != null) {    
+                    if (peopleOffRide != null && guy != null) {
                         Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
-    
+
                         if (personsChoice != null) {
                             personsChoice.addPersonToLine(guy, guy.hasFastPass());
                         } else {
@@ -102,16 +107,16 @@ public class Simulations
 
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
-        
+
         //Close all rides
         for(int i = 0; i < codeLand.getAttractions().size(); i++) {
-        	Attraction currentAttraction = codeLand.getAttractions().get(i);
-        	ArrayList<Person> disgruntledPeople = currentAttraction.closeAttraction();
-        	for(int j = 0; j < disgruntledPeople.size(); j++) {
-        		codeLand.addToDoneForDay(disgruntledPeople.get(j));
-        	}
+            Attraction currentAttraction = codeLand.getAttractions().get(i);
+            ArrayList<Person> disgruntledPeople = currentAttraction.closeAttraction();
+            for(int j = 0; j < disgruntledPeople.size(); j++) {
+                codeLand.addToDoneForDay(disgruntledPeople.get(j));
+            }
         }
-        
+
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
@@ -123,39 +128,43 @@ public class Simulations
             // Continue processing wait times for a person until there are none left
             while (p.peekLastWaitTime() != null) {
                 int waitTimeDuration = p.popLastWaitTime().getWaitDuration();
-                
+
                 if(waitTimeDuration > 0) {
-                	timeWaited += waitTimeDuration;
+                    timeWaited += waitTimeDuration;
                 }
                 if(waitTimeDuration == 0 && p.getRidesRidden().size() != 0) {
-                	timeWaited += p.getRidesRidden().get(0).getDuration();
+                    timeWaited += p.getRidesRidden().get(0).getDuration();
                 }
                 totalTimeWaited += waitTimeDuration;
             }
             fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
-        
+
         System.out.println("Total time waited:" + " " + totalTimeWaited);
         System.out.println("Total number of people: " + doneForDay.size());
         System.out.println("Average time waited: " + (totalTimeWaited / doneForDay.size()));
         System.out.println();
-        
+
 //        Collections.sort(fineAdditions);
 //        for(int i = 0; i < fineAdditions.size(); i++) {
 //        	System.out.println(fineAdditions.get(i).getTotalTimeWaited());
 //        	//System.out.println(customers.get(fineAdditions.get(i).getId()));
 //        	//System.out.println();
 //        }
-//        
+//
 //        System.out.println();
-//        
+//
 //        for(int i = 0; i < fineAdditions.size(); i++) {
 //        	System.out.println(fineAdditions.get(i).getNumberOfRidesRidden());
 //        }
     }
-    
-    public static void FastPassSimulation() {
-    	
+
+    /**
+     * fastPassSimulation
+     * The simulation to run in which a percentage (25%) of people have fastpasses
+     */
+    public static void fastPassSimulation() {
+
         int fastPassUsage = 0; //for finding average fastpass usage
         int population = 300;
 
@@ -184,12 +193,12 @@ public class Simulations
             Person guy = new Person(i);
             customers.add(guy);
             if(i <= howManyPremiumUsers) {
-            	guy.setIsPremium(true);
-            	guy.addFastPass(new FastPass());
+                guy.setIsPremium(true);
+                guy.addFastPass(new FastPass());
             }
 
             Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
-            
+
             if (personsChoice != null) {
                 personsChoice.addPersonToLine(guy, guy.hasFastPass());
             } else {
@@ -216,12 +225,12 @@ public class Simulations
                 while (i < peopleOffRide.length && hasMoreRiders) {
                     Person guy = peopleOffRide[i];
                     if(guy != null && guy.getIsPremium() == true) {
-                    	guy.addFastPass(new FastPass());
+                        guy.addFastPass(new FastPass());
                     }
 
-                    if (peopleOffRide != null && guy != null) {    
+                    if (peopleOffRide != null && guy != null) {
                         Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
-    
+
                         if (personsChoice != null) {
                             personsChoice.addPersonToLine(guy, guy.hasFastPass());
                         } else {
@@ -238,16 +247,16 @@ public class Simulations
 
             currentTime.setCurrentTime(currentTime.getCurrentTime() + 5); //5 minutes pass
         }
-        
+
         //Close all rides
         for(int i = 0; i < codeLand.getAttractions().size(); i++) {
-        	Attraction currentAttraction = codeLand.getAttractions().get(i);
-        	ArrayList<Person> disgruntledPeople = currentAttraction.closeAttraction();
-        	for(int j = 0; j < disgruntledPeople.size(); j++) {
-        		codeLand.addToDoneForDay(disgruntledPeople.get(j));
-        	}
+            Attraction currentAttraction = codeLand.getAttractions().get(i);
+            ArrayList<Person> disgruntledPeople = currentAttraction.closeAttraction();
+            for(int j = 0; j < disgruntledPeople.size(); j++) {
+                codeLand.addToDoneForDay(disgruntledPeople.get(j));
+            }
         }
-        
+
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
@@ -258,33 +267,33 @@ public class Simulations
             // Continue processing wait times for a person until there are none left
             while (p.peekLastWaitTime() != null) {
                 int waitTimeDuration = p.popLastWaitTime().getWaitDuration();
-                
+
                 if(waitTimeDuration > 0) {
-                	timeWaited += waitTimeDuration;
+                    timeWaited += waitTimeDuration;
                 }
                 if(waitTimeDuration == 0 && p.getRidesRidden().size() != 0) {
-                	timeWaited += p.getRidesRidden().get(0).getDuration();
+                    timeWaited += p.getRidesRidden().get(0).getDuration();
                 }
                 totalTimeWaited += waitTimeDuration;
             }
             fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
-        
+
         System.out.println("Total time waited:" + " " + totalTimeWaited);
         System.out.println("Total number of people: " + doneForDay.size());
         System.out.println("Average time waited: " + (totalTimeWaited / doneForDay.size()));
         System.out.println();
-        
+
         Collections.sort(fineAdditions);
 //        for(int i = 0; i < fineAdditions.size(); i++) {
-//        	
+//
 //        	System.out.println(fineAdditions.get(i).getTotalTimeWaited());
 //        	//System.out.println(customers.get(fineAdditions.get(i).getId()));
 //        	//System.out.println();
 //        }
-//        
+//
 //        System.out.println();
-//        
+//
 //        for(int i = 0; i < fineAdditions.size(); i++) {
 //        	System.out.println(fineAdditions.get(i).getNumberOfRidesRidden());
 //        }
