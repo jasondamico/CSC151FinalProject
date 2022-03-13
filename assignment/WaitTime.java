@@ -15,6 +15,11 @@ public class WaitTime {
         this.setEndWait(0);
     }
 
+    public WaitTime(Time time) {
+        this.setStartWait(time);
+        this.setEndWait(0);
+    }
+
     public int getStartWait() {
         return startWait;
     }
