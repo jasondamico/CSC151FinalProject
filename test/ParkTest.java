@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.Test;
-import org.w3c.dom.Attr;
 
 import assignment.Attraction;
 import assignment.Park;
+import assignment.Person;
 
 
 public class ParkTest {
@@ -59,8 +59,57 @@ public class ParkTest {
     }
 
     @Test
-    public void stringConstructor() {
-        Park p = new Park("my park");
-        assertEquals(p.getName(), "my park");
+    public void getMinWaitTime() {
+        Attraction atr1 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 15; i++) {
+            atr1.addPersonToLine(new Person(i), false);
+        }
+
+        Attraction atr2 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 16; i++) {
+            atr2.addPersonToLine(new Person(i), false);
+        }
+
+        Attraction atr3 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 10; i++) {
+            atr3.addPersonToLine(new Person(i), false);
+        }
+
+        ArrayList<Attraction> attractions = new ArrayList<>(Arrays.asList((new Attraction[] {atr1, atr2, atr3})));
+
+        assertEquals(atr3, Park.getMinWaitTime(attractions));
+    }
+
+    @Test
+    public void getMaxWaitTime() {
+        Attraction atr1 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 15; i++) {
+            atr1.addPersonToLine(new Person(i), false);
+        }
+
+        Attraction atr2 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 27; i++) {
+            atr2.addPersonToLine(new Person(i), false);
+        }
+
+        Attraction atr3 = new Attraction("atr1", 5, 5, 5);
+
+        for (int i = 0; i < 10; i++) {
+            atr3.addPersonToLine(new Person(i), false);
+        }
+
+        ArrayList<Attraction> attractions = new ArrayList<>(Arrays.asList((new Attraction[] {atr1, atr2, atr3})));
+
+        assertEquals(atr2, Park.getMaxWaitTime(attractions));
+    }
+
+    @Test
+    public void pickAttraction() {
+        
     }
 }
