@@ -78,7 +78,7 @@ public class Park {
      * @param attractions ArrayList of attractions
      * @return Attraction with the lowest wait time
      */
-    public Attraction getMinWaitTime(ArrayList<Attraction> attractions) {
+    public static Attraction getMinWaitTime(ArrayList<Attraction> attractions) {
         if(attractions.isEmpty()) {
             return null;
         }
@@ -96,7 +96,7 @@ public class Park {
      * @param attractions list of all the attractions
      * @return Attraction with the highest wait time
      */
-    public Attraction getMaxWaitTime(ArrayList<Attraction> attractions) {
+    public static Attraction getMaxWaitTime(ArrayList<Attraction> attractions) {
         if(attractions.isEmpty()) {
             return null;
         }
@@ -137,12 +137,12 @@ public class Park {
                 return attractions.get(0);
             }
             if(p.isWantsMostRides()) {
-                return this.getMaxWaitTime(attractions);
+                return getMaxWaitTime(attractions);
             }
         }
         else {
             if(p.isWantsPopularRides() && p.isWantsMostRides()) {
-                Attraction mostPopularShortestWaitTime = this.getMinWaitTime(this.getThreeMostPopular());
+                Attraction mostPopularShortestWaitTime = getMinWaitTime(this.getThreeMostPopular());
                 if(mostPopularShortestWaitTime.getWaitTime() > p.getBalkPoint()) {
                     for(int i = 0; i < attractions.size(); i++) {
                         if(attractions.get(i).getWaitTime() < p.getBalkPoint()) {
@@ -172,14 +172,14 @@ public class Park {
                 return null;
             }
             else if(p.isWantsMostRides()) {
-                if(this.getMinWaitTime(attractions).getWaitTime() > p.getBalkPoint()) {
+                if(getMinWaitTime(attractions).getWaitTime() > p.getBalkPoint()) {
                     if(p.getMinStay() > Simulations.currentTime.getCurrentTime()){
-                        return this.getMinWaitTime(attractions);
+                        return getMinWaitTime(attractions);
                     }
                     return null;
                 }
                 else {
-                    return this.getMinWaitTime(attractions);
+                    return getMinWaitTime(attractions);
                 }
             }
         }
