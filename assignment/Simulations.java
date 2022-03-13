@@ -77,7 +77,6 @@ public class Simulations
                 if (!ride.isCurrentlyRunning() && ride.getCurrentlyInLine() > 0)
                 {
                     ride.startRide(); //puts people on the ride to capacity
-                    ride.setRideStartTime(currentTime.getCurrentTime());
                 }
 
                 // Check ride
@@ -214,7 +213,6 @@ public class Simulations
                 if (!ride.isCurrentlyRunning() && ride.getCurrentlyInLine() > 0)
                 {
                     ride.startRide(); //puts people on the ride to capacity
-                    ride.setRideStartTime(currentTime.getCurrentTime());
                 }
 
                 // Check ride

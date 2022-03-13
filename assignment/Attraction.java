@@ -112,7 +112,7 @@ public class Attraction implements Comparable<Attraction> {
         return rideStartTime;
     }
 
-    public void setRideStartTime(int rideStartTime) {
+    private void setRideStartTime(int rideStartTime) {
         if (rideStartTime >= 0) {
             this.rideStartTime = rideStartTime;
         } else {
@@ -212,6 +212,7 @@ public class Attraction implements Comparable<Attraction> {
 
         if (seatsFilled > 0) {
             this.setCurrentlyRunning(true);
+            this.setRideStartTime(Simulations.currentTime.getCurrentTime());
         } else {
             this.setCurrentlyRunning(false);
         }
