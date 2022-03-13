@@ -1,3 +1,4 @@
+
 package assignment;
 
 import java.util.ArrayList;
@@ -8,28 +9,23 @@ import java.util.Queue;
 /*
 The Attraction Class creates a ride, given the information of its name, popularity (1-5 stars),
 how many people the ride can hold (capacity), and how long it takes for the ride to run fully (duration).
-
 Every park should have a list of attractions, this is where they get made.
  */
 public class Attraction implements Comparable<Attraction> {
 
     // PRIVATE INSTANCE VARIABLES
 
-    // Ride characteristics
     private String name;
-    private int duration;
-    private int popularityScore;
-    private int capacity;
-
-    // Storage of riders
     private Queue<Person> regular;
     private Queue<Person> fast;
+    private int popularityScore;
+    private int capacity;
     private Person[] onRide;
-
-    // Tracking relevant information about ride
     private boolean currentlyRunning;
+    private int duration;
     private int rideStartTime;
     private int currentlyInLine;
+    private int waitTime;
 
     /** Constructor of Attraction
      * @param name Name of the attraction
@@ -38,10 +34,10 @@ public class Attraction implements Comparable<Attraction> {
      * @param duration how long the ride runs for
      */
     public Attraction(String name, int popularityScore, int capacity, int duration) {
-        this.setName(name);
-        this.setPopularityScore(popularityScore);
-        this.setCapacity(capacity);
-        this.setDuration(duration);
+        this.name = name;
+        this.popularityScore = popularityScore;
+        this.capacity = capacity;
+        this.duration = duration;
 
         // Values initialized to empty values, do not take argument values
         this.regular = new LinkedList<>();
@@ -52,6 +48,7 @@ public class Attraction implements Comparable<Attraction> {
         this.currentlyInLine = 0;
     }
 
+    
     public String getName() {
         return name;
     }
@@ -65,11 +62,7 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     private void setPopularityScore(int popularityScore) {
-        if (popularityScore >= 1 && popularityScore <= 5) {
-            this.popularityScore = popularityScore;
-        } else {
-            throw new IllegalArgumentException("Popularity score must be between 1 and 5.");
-        }
+        this.popularityScore = popularityScore;
     }
 
     public int getCapacity() {
@@ -77,23 +70,7 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     private void setCapacity(int capacity) {
-        if (capacity > 0) {
-            this.capacity = capacity;
-        } else {
-            throw new IllegalArgumentException("Capacity must be greater than or equal to 1.");
-        }
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    private void setDuration(int duration) {
-        if (duration > 0) {
-            this.duration = duration;
-        } else {
-            throw new IllegalArgumentException("Duration must be greater than or equal to 1.");
-        }
+        this.capacity = capacity;
     }
 
     /**
@@ -108,20 +85,20 @@ public class Attraction implements Comparable<Attraction> {
         this.currentlyRunning = currentlyRunning;
     }
 
-    /**
-     * getRideStartTime
-     * @return time the ride started at
-     */
+    public int getDuration() {
+        return duration;
+    }
+
+    private void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public int getRideStartTime() {
         return rideStartTime;
     }
 
-    private void setRideStartTime(int rideStartTime) {
-        if (rideStartTime >= 0) {
-            this.rideStartTime = rideStartTime;
-        } else {
-            throw new IllegalArgumentException("Ride start time must be greater than or equal to 0.");
-        }
+    public void setRideStartTime(int rideStartTime) {
+        this.rideStartTime = rideStartTime;
     }
 
     public int getCurrentlyInLine() {
@@ -129,15 +106,16 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     public void setCurrentlyInLine(int currentlyInLine) {
-        if (currentlyInLine >= 0) {
-            this.currentlyInLine = currentlyInLine;
-        } else {
-            throw new IllegalArgumentException("Number of people currently in line must be greater than or equal to 0.");
-        }
+        this.currentlyInLine = currentlyInLine;
     }
 
+    /**
+     * addPersonToLine adds given person to line, and whether or not they have a fast pass
+     * @param person The given person
+     * @param hasFastPass whether or not the person has a fastpass
+     */
     public void addPersonToLine(Person person, boolean hasFastPass) {
-        if (hasFastPass) {
+        if ((hasFastPass) && (person.peekFastPassToUse().getAttractionName().equals("UNIVERSAL") || person.peekFastPassToUse().getAttractionName().equals(this.name))) {
             this.fast.offer(person);
 
             // Pops FastPass
@@ -150,16 +128,14 @@ public class Attraction implements Comparable<Attraction> {
         person.addWaitTime(new WaitTime(Simulations.currentTime.getCurrentTime()));
 
         this.currentlyInLine++;
+
+        this.setWaitTime(Simulations.currentTime.getCurrentTime());
     }
 
     /**
-     * Returns an array of all of the people on the ride (potentially with empty seats).
-     * @return An array of current riders of the ride.
+     * numPeopleOnRide
+     * @return the number of people currently on the ride
      */
-    public Person[] getOnRide() {
-        return onRide.clone();
-    }
-
     public int numPeopleOnRide() {
         int peopleOnRide = 0;
 
@@ -174,19 +150,24 @@ public class Attraction implements Comparable<Attraction> {
         return peopleOnRide;
     }
 
+    /**
+     * compareTo Compares this attraction and a given Attraction based off of popularity scores
+     * @return 0 if given Attraction's popularity score equals this's popularity score, 
+     * 1 if this's popularity score is greater than given attraction's, -1 if this's popularity score is less than the given attraction's
+     */
     public int compareTo(Attraction otherAttraction) {
         if (this.getPopularityScore() > otherAttraction.getPopularityScore()) {
             return 1;
         } else if (this.getPopularityScore() < otherAttraction.getPopularityScore()) {
             return -1;
         } else {
-            // Assertion: the two popularity scores are equal
+            // Assertion: the two popularity scores are equal 
             return 0;
         }
     }
 
     /**
-     * startRide
+     * startRide Gets people out of the queues and onto the ride, and starts running it
      * Precondition: Attraction is not currently running.
      */
     public void startRide() {
@@ -200,10 +181,19 @@ public class Attraction implements Comparable<Attraction> {
                 Person p;
 
                 // Initializing person
-                if (this.fast.peek() != null) {
-                    p = this.fast.remove();
-                } else {
-                    p = this.regular.remove();
+                // First fill half the ride with people out of the fast lane
+                // Then fill the rest of the ride with as many people out of the regular lane as possible
+                // If the regular lane is empty and the required number of fast past people are already on, the rest are allowed to be fast pass users
+                if (this.fast.peek() != null && seatsFilled < this.capacity*.66) {
+                    p = this.fast.remove(); 
+                }
+                
+                else if(this.regular.peek() != null){
+                    p = this.regular.remove();   
+                }
+                
+                else {
+                	p = this.fast.remove();
                 }
 
                 // Set ending wait time of rider leaving queue
@@ -216,6 +206,9 @@ public class Attraction implements Comparable<Attraction> {
 
                 seatsFilled++;
                 this.currentlyInLine--;
+
+                // Update wait time of ride
+                this.setWaitTime(Simulations.currentTime.getCurrentTime());
             } else {
                 // Assertion: both queues are empty
                 queuesEmpty = true;
@@ -224,7 +217,6 @@ public class Attraction implements Comparable<Attraction> {
 
         if (seatsFilled > 0) {
             this.setCurrentlyRunning(true);
-            this.setRideStartTime(Simulations.currentTime.getCurrentTime());
         } else {
             this.setCurrentlyRunning(false);
         }
@@ -233,10 +225,11 @@ public class Attraction implements Comparable<Attraction> {
     /**
      * checkRuntime
      * Checks if the ride has finished running
+     * @param currentTime
      * @return The people leaving the ride if finished, or an empty list of people if not
      */
-    public Person[] checkRuntime() {
-        if (this.isCurrentlyRunning() && Simulations.currentTime.getCurrentTime() >= this.getRideStartTime() + this.getDuration()) {
+    public Person[] checkRuntime(int currentTime) {
+        if (currentTime == this.getRideStartTime() + this.getDuration()) {
             // Assertion: ride has finished
             Person[] leavingRiders = this.onRide;
             this.onRide = new Person[capacity];
@@ -250,18 +243,23 @@ public class Attraction implements Comparable<Attraction> {
     }
 
     /**
-     * getWaitTime
-     * Returns the current wait time for the ride based on the current time.
-     * @return
+     * setWaitTime
+     * sets the current wait time for the ride
+     * @param currentTime
+     * @return current wait time for ride
      */
-    public int getWaitTime() {
-        int lineWait = (this.currentlyInLine / this.getCapacity()) * this.getDuration();
-        
-        if (this.isCurrentlyRunning()) {
-            return lineWait + this.getUntilRideDone();
-        }
+    public int setWaitTime(int currentTime) {
+        int lineWait = this.getDuration() + (this.currentlyInLine / this.getCapacity()) * this.getDuration();
+        // int untilRideIsDone = this.getUntilRideDone();
+        // this.waitTime = untilRideIsDone + lineWait;
+        // return waitTime;
 
+        this.waitTime = lineWait;
         return lineWait;
+    }
+    
+    public int getWaitTime() {
+    	return this.waitTime;
     }
 
     /**
@@ -271,12 +269,8 @@ public class Attraction implements Comparable<Attraction> {
     public int getUntilRideDone() {
         int endTime = this.getDuration() + this.getRideStartTime();
 
-        int calc = endTime - Simulations.currentTime.getCurrentTime();
-
-        // Returns 0 if the end time is less than the current time, i.e., if the ride end time has already passed
-        return Math.max(calc, 0);
+        return endTime - Simulations.currentTime.getCurrentTime();
     }
-
 
     /**
      * closeAttraction
@@ -285,25 +279,30 @@ public class Attraction implements Comparable<Attraction> {
      */
     public ArrayList<Person> closeAttraction() {
         // People who were in the lines
-        ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
+    	ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
         peopleLeavingRide.addAll(this.fast);
-
+        
+        for(int i = 0; i < peopleLeavingRide.size(); i++) {
+        	if(peopleLeavingRide.get(i).peekLastWaitTime() != null) {
+        		peopleLeavingRide.get(i).peekLastWaitTime().setEndWait(Simulations.currentTime.getCurrentTime());
+        	}
+        	
+        }
+        
         // Add all people who were on the ride
         for (int i = 0; i < this.onRide.length; i++) {
             Person p = this.onRide[i];
-
+            
             if (p == null) {
                 break;
             } else {
                 peopleLeavingRide.add(p);
             }
         }
-
-        this.setCurrentlyRunning(false);
-
+        
         return peopleLeavingRide;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -366,5 +365,5 @@ public class Attraction implements Comparable<Attraction> {
         System.out.println(new Attraction("Foo", 10, 15, 5));
     }
 
-
+    
 }
