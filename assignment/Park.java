@@ -209,6 +209,26 @@ public class Park {
         return toReturn;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Park park = (Park) o;
+
+        if (attractions != null ? !attractions.equals(park.attractions) : park.attractions != null) return false;
+        if (doneForDay != null ? !doneForDay.equals(park.doneForDay) : park.doneForDay != null) return false;
+        return name != null ? name.equals(park.name) : park.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = attractions != null ? attractions.hashCode() : 0;
+        result = 31 * result + (doneForDay != null ? doneForDay.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
     public static void main(String[] args) {
         ArrayList<Attraction> atr = new ArrayList<>();
 
