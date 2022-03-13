@@ -148,6 +148,14 @@ public class Attraction implements Comparable<Attraction> {
         this.currentlyInLine++;
     }
 
+    /**
+     * Returns an array of all of the people on the ride (potentially with empty seats).
+     * @return An array of current riders of the ride.
+     */
+    public Person[] getOnRide() {
+        return onRide.clone();
+    }
+
     public int numPeopleOnRide() {
         int peopleOnRide = 0;
 
