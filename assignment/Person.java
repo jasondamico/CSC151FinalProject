@@ -185,10 +185,6 @@ public class Person {
         return this.fastPasses.size();
     }
 
-    public Attraction pickAttraction(){
-        return null;
-    }
-
     @Override
     public String toString() {
         String toReturn = "PERSON ID: " + this.getId() + "\n";
