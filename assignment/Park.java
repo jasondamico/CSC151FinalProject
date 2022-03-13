@@ -39,15 +39,7 @@ public class Park {
      */
     public Park(String name, ArrayList<Attraction> attractions){
         this.setName(name);
-        this.attractions = new ArrayList<Attraction>();
-
-        for(int i = 0; i < attractions.size(); i++) {
-            this.attractions.add(attractions.get(i));
-        }
-
-        // Sort in descending order (by popularity)
-        Collections.sort(this.attractions);
-        Collections.reverse(this.attractions);
+        this.setAttractions(attractions);
 
         this.doneForDay = new ArrayList<Person>();
     }
@@ -62,6 +54,17 @@ public class Park {
             toReturn.add(this.attractions.get(i));
         }
         return toReturn;
+
+    /**
+     * Sets the passed ArrayList of attractions to the object's instance variable, sorts them in descending order of popularity.
+     * @param attractions An unsorted ArrayList of attractions.
+     */
+    public void setAttractions(ArrayList<Attraction> attractions) {
+        this.attractions = new ArrayList<Attraction>(attractions);
+
+        // Sort in descending order (by popularity)
+        Collections.sort(this.attractions);
+        Collections.reverse(this.attractions);
     }
 
     public String getName() {
