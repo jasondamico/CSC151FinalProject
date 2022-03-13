@@ -38,4 +38,8 @@ public class WaitTime {
     public void setEndWait(Time time) {
         this.endWait = time.getCurrentTime();
     }
+
+    public int getWaitDuration() {
+        return this.getEndWait() - this.getStartWait();
+    }
 }

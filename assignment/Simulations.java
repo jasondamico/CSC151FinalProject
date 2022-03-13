@@ -119,16 +119,18 @@ public class Simulations
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
             int timeWaited = 0;
+
+            // Continue processing wait times for a person until there are none left
             while (p.peekLastWaitTime() != null) {
-                WaitTime rideWaitTime = p.popLastWaitTime();
-                int waitTime = rideWaitTime.getEndWait() - rideWaitTime.getStartWait();
-                if(waitTime > 0) {
-                	timeWaited += waitTime;
+                int waitTimeDuration = p.popLastWaitTime().getWaitDuration();
+                
+                if(waitTimeDuration > 0) {
+                	timeWaited += waitTimeDuration;
                 }
-                if(waitTime == 0 && p.getRidesRidden().size() != 0) {
+                if(waitTimeDuration == 0 && p.getRidesRidden().size() != 0) {
                 	timeWaited += p.getRidesRidden().get(0).getDuration();
                 }
-                totalTimeWaited += waitTime;
+                totalTimeWaited += waitTimeDuration;
             }
             fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
@@ -253,16 +255,17 @@ public class Simulations
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
             int timeWaited = 0;
+            // Continue processing wait times for a person until there are none left
             while (p.peekLastWaitTime() != null) {
-                WaitTime rideWaitTime = p.popLastWaitTime();
-                int waitTime = rideWaitTime.getEndWait() - rideWaitTime.getStartWait();
-                if(waitTime > 0) {
-                	timeWaited += waitTime;
+                int waitTimeDuration = p.popLastWaitTime().getWaitDuration();
+                
+                if(waitTimeDuration > 0) {
+                	timeWaited += waitTimeDuration;
                 }
-                if(waitTime == 0 && p.getRidesRidden().size() != 0) {
+                if(waitTimeDuration == 0 && p.getRidesRidden().size() != 0) {
                 	timeWaited += p.getRidesRidden().get(0).getDuration();
                 }
-                totalTimeWaited += waitTime;
+                totalTimeWaited += waitTimeDuration;
             }
             fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
