@@ -2,10 +2,15 @@ package assignment;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.Random;
 import java.util.Stack;
 import java.lang.Math;
 
+/*
+The Person Class is meant to create an object (person) who will go on Attractions within the Park
+The Person waits in the lines, and goes on rides.
+Each Person has their own preferences of what rides to go on, how long they are willing to wait in a line,
+and how long they will stay in the park.
+ */
 public class Person {
     // PIVs
 
@@ -191,7 +196,7 @@ public class Person {
      * adds new WaitTime to stack of all the waits the person as been through
      * @param waitTime the WaitTime they just went through
      */
-    public void addWaitTime(WaitTime waitTime) 
+    public void addWaitTime(WaitTime waitTime)
     {
         this.waitTimes.add(waitTime);
     }
@@ -282,7 +287,7 @@ public class Person {
         }
         return false;
     }
-    
+
     public boolean getIsPremium() {
         return this.isPremium;
     }
