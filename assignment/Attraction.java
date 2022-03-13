@@ -2,6 +2,7 @@
 package assignment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,6 +23,12 @@ public class Attraction implements Comparable<Attraction> {
     private int waitTime;
     // TODO: Add currently in regular line, fast line
 
+    /** Constructor of Attraction
+     * @param name Name of the attraction
+     * @param popularityScore 1-5 stars, how popular the ride is (5 best, 1 worst)
+     * @param capacity how many people the ride can fit at a time
+     * @param duration how long the ride runs for
+     */
     public Attraction(String name, int popularityScore, int capacity, int duration) {
         this.name = name;
         this.popularityScore = popularityScore;
@@ -61,6 +68,10 @@ public class Attraction implements Comparable<Attraction> {
         this.capacity = capacity;
     }
 
+    /**
+     * isCurrentlyRunning
+     * @return if the ride is running or not (True/False)
+     */
     public boolean isCurrentlyRunning() {
         return currentlyRunning;
     }
@@ -77,6 +88,10 @@ public class Attraction implements Comparable<Attraction> {
         this.duration = duration;
     }
 
+    /**
+     * getRideStartTime
+     * @return time the ride started at
+     */
     public int getRideStartTime() {
         return rideStartTime;
     }
@@ -131,12 +146,13 @@ public class Attraction implements Comparable<Attraction> {
         } else if (this.getPopularityScore() < otherAttraction.getPopularityScore()) {
             return -1;
         } else {
-            // Assertion: the two popularity scores are equal 
+            // Assertion: the two popularity scores are equal
             return 0;
         }
     }
 
     /**
+     * startRide
      * Precondition: Attraction is not currently running.
      */
     public void startRide() {
@@ -182,6 +198,12 @@ public class Attraction implements Comparable<Attraction> {
         }
     }
 
+    /**
+     * checkRuntime
+     * Checks if the ride has finished running
+     * @param currentTime
+     * @return The people leaving the ride if finished, or an empty list of people if not
+     */
     public Person[] checkRuntime(int currentTime) {
         if (currentTime == this.getRideStartTime() + this.getDuration()) {
             // Assertion: ride has finished
@@ -196,6 +218,12 @@ public class Attraction implements Comparable<Attraction> {
         }
     }
 
+    /**
+     * setWaitTime
+     * sets the current wait time for the ride
+     * @param currentTime
+     * @return current wait time for ride
+     */
     public int setWaitTime(int currentTime) {
         int lineWait = this.getDuration() + (this.currentlyInLine / this.getCapacity()) * this.getDuration();
         // int untilRideIsDone = this.getUntilRideDone();
@@ -205,15 +233,81 @@ public class Attraction implements Comparable<Attraction> {
         this.waitTime = lineWait;
         return lineWait;
     }
-    
+
     public int getWaitTime() {
-    	return this.waitTime;
+        return this.waitTime;
     }
 
+    /**
+     * getUntilRideDone
+     * @return how much time is left until the ride is done running
+     */
     public int getUntilRideDone() {
         int endTime = this.getDuration() + this.getRideStartTime();
 
         return endTime - Simulations.currentTime.getCurrentTime();
+    }
+
+
+    /**
+     * closeAttraction
+     * When the attraction needs to close, take everyone off the ride and out of line
+     * @return ArrayList of people leaving the line & the ride
+     */
+    public ArrayList<Person> closeAttraction() {
+        // People who were in the lines
+        ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
+        peopleLeavingRide.addAll(this.fast);
+
+        // Add all people who were on the ride
+        for (int i = 0; i < this.onRide.length; i++) {
+            Person p = this.onRide[i];
+
+            if (p == null) {
+                break;
+            } else {
+                peopleLeavingRide.add(p);
+            }
+        }
+
+        return peopleLeavingRide;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Attraction that = (Attraction) o;
+
+        if (popularityScore != that.popularityScore) return false;
+        if (capacity != that.capacity) return false;
+        if (currentlyRunning != that.currentlyRunning) return false;
+        if (duration != that.duration) return false;
+        if (rideStartTime != that.rideStartTime) return false;
+        if (currentlyInLine != that.currentlyInLine) return false;
+        if (waitTime != that.waitTime) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (regular != null ? !regular.equals(that.regular) : that.regular != null) return false;
+        if (fast != null ? !fast.equals(that.fast) : that.fast != null) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(onRide, that.onRide);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (regular != null ? regular.hashCode() : 0);
+        result = 31 * result + (fast != null ? fast.hashCode() : 0);
+        result = 31 * result + popularityScore;
+        result = 31 * result + capacity;
+        result = 31 * result + Arrays.hashCode(onRide);
+        result = 31 * result + (currentlyRunning ? 1 : 0);
+        result = 31 * result + duration;
+        result = 31 * result + rideStartTime;
+        result = 31 * result + currentlyInLine;
+        result = 31 * result + waitTime;
+        return result;
     }
 
     @Override
@@ -239,24 +333,6 @@ public class Attraction implements Comparable<Attraction> {
     public static void main(String[] args) {
         System.out.println(new Attraction("Foo", 10, 15, 5));
     }
-    
-    public ArrayList<Person> closeAttraction() {
-        // People who were in the lines
-    	ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
-        peopleLeavingRide.addAll(this.fast);
-        
-        // Add all people who were on the ride
-        for (int i = 0; i < this.onRide.length; i++) {
-            Person p = this.onRide[i];
 
-            if (p == null) {
-                break;
-            } else {
-                peopleLeavingRide.add(p);
-            }
-        }
-        
-        return peopleLeavingRide;
-    }
-    
+
 }
