@@ -29,6 +29,7 @@ public class Park {
     public Park(String name) {
         attractions = new ArrayList<Attraction>();
         this.setName(name);
+
         this.doneForDay = new ArrayList<Person>();
     }
 
@@ -49,11 +50,8 @@ public class Park {
      * @return ArrayList of the attractions in the park
      */
     public ArrayList<Attraction> getAttractions(){
-        ArrayList<Attraction> toReturn = new ArrayList<Attraction>();
-        for(int i = 0; i < this.attractions.size(); i++) {
-            toReturn.add(this.attractions.get(i));
-        }
-        return toReturn;
+        return new ArrayList<>(this.attractions);
+    }
 
     /**
      * Sets the passed ArrayList of attractions to the object's instance variable, sorts them in descending order of popularity.
