@@ -1,3 +1,5 @@
+
+
 package assignment;
 
 import java.util.ArrayList;
@@ -90,6 +92,7 @@ public class Park {
      * getMinWaitTime
      * @param attractions ArrayList of attractions
      * @return Attraction with the lowest wait time
+     * Time complexity: O(n) where n = the number of attractions in attractions
      */
     public Attraction getMinWaitTime(ArrayList<Attraction> attractions) {
     	if(attractions.isEmpty()) {
@@ -108,6 +111,7 @@ public class Park {
      * getMaxWaitTime
      * @param attractions list of all the attractions
      * @return Attraction with the highest wait time
+     * Time complexity: O(n) where n = the number of attractions in attractions
      */
     public Attraction getMaxWaitTime(ArrayList<Attraction> attractions) {
     	if(attractions.isEmpty()) {
@@ -125,6 +129,8 @@ public class Park {
     /**
      * getThreeMostPopular
      * @return ArrayList of the 3 most popular attractions
+     * Time complexity: O(c)
+     * precondition: There are at least three rides in the park
      */
     private ArrayList<Attraction> getThreeMostPopular(){
     	ArrayList<Attraction> toReturn = new ArrayList<Attraction>();
@@ -139,6 +145,7 @@ public class Park {
      * @param p 
      * @param attractions 
      * @return Attraction to queue person p into, or null for the person to leave the park
+     * Time complexity: O(n), where n = the number of attractions in the ArrayList<Attraction> attraction
      */
     public Attraction pickAttraction(Person p, ArrayList<Attraction> attractions) {
     	if(Simulations.currentTime.getCurrentTime() >= Simulations.parkHours) {
