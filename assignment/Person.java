@@ -69,7 +69,7 @@ public class Person {
 
         this.setWantsMostRides((Math.random() * 2 > 1) ? true : false);
         this.setWantsPopularRides((Math.random() * 2 > 1) ? true : false);
-        this.setBalkPoint((int)(Math.random()*240));
+        this.setBalkPoint((int)(Math.random()*240) + 120);
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
         this.waitTimes = new Stack<>();
@@ -209,6 +209,7 @@ public class Person {
         toReturn += "\nNumber of fast passes: " + this.numFastPasses();
         toReturn += "\nWants popular rides: " + this.isWantsPopularRides();
         toReturn += "\nWants most rides: " + this.isWantsMostRides();
+        toReturn += "\nBalk point: " + this.balkPoint;
 
         return toReturn;
     }
@@ -228,6 +229,10 @@ public class Person {
     	this.isPremium = isPremium;
     }
 
+    public ArrayList<Attraction> getRidesRidden(){
+    	return this.ridesVisited;
+    }
+    
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             System.out.println(new Person(i));
