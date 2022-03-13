@@ -299,7 +299,6 @@ public class Attraction implements Comparable<Attraction> {
         if (duration != that.duration) return false;
         if (rideStartTime != that.rideStartTime) return false;
         if (currentlyInLine != that.currentlyInLine) return false;
-        if (waitTime != that.waitTime) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (regular != null ? !regular.equals(that.regular) : that.regular != null) return false;
         if (fast != null ? !fast.equals(that.fast) : that.fast != null) return false;
