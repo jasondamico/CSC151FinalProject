@@ -14,6 +14,15 @@ public class Simulations
     public static Time currentTime = new Time();
     public static int parkHours = 480; //8 hours
 
+    /**
+     * noFastPassSimulation runs a simulation where nobody has any FastPasses
+     * @param ridesInPark list of rides in park
+     * @param initialPopulation how many people there are to start off
+     * @param newArrivalsPerHalfHour how many new arrivals per half hour
+     * @param parkName park's name
+     * Time complexity: O(n^m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
+     * as every 5 minute step, every attraction is iterated through
+     */
     public static void noFastPassSimulation(ArrayList<Attraction> ridesInPark, int initialPopulation, int newArrivalsPerHalfHour, String parkName)
     {
     	currentTime.setCurrentTime(0);
@@ -143,6 +152,16 @@ public class Simulations
 //        }
     }
     
+    /**
+     * noFastPassSimulation runs a simulation where nobody has any FastPasses
+     * @param fastPassPercent a double that represents the percent of premium users, for example: 0.25 = 25% of the population will be premium
+     * @param ridesInPark list of rides in park
+     * @param initialPopulation how many people there are to start off
+     * @param newArrivalsPerHalfHour how many new arrivals per half hour
+     * @param parkName park's name
+     * Time complexity: O(n^m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
+     * as every 5 minute step, every attraction is iterated through
+     */
     public static void FastPassSimulation(double fastPassPercent, ArrayList<Attraction> ridesInPark, int initialPopulation, 
     		int newArrivalsPerHalfHour, String parkName) {
     	currentTime.setCurrentTime(0);
