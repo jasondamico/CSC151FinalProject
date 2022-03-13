@@ -72,5 +72,5 @@ public class GarbageCollector implements Comparable<GarbageCollector>{
         result = 31 * result + totalTimeWaited;
         result = 31 * result + numberOfRidesRidden;
         return result;
-    }
+    } 
 }
