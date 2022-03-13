@@ -33,7 +33,7 @@ public class Person {
     /**
      * empty constructor
      */
-    public Person()
+    public Person() 
     {
         this.setId(0);
         this.setMinStay(0);
@@ -72,7 +72,7 @@ public class Person {
             // Min stay time is at least 60 minutes after opening, could be maximum of closing time
             int minStayTime = (int) (hoursLeft * Math.random()) + this.arrivalTime  + MIN_STAY;
             if(minStay > Simulations.parkHours) {
-                minStay = Simulations.parkHours;
+            	minStay = Simulations.parkHours;
             }
             this.setMinStay(minStayTime);
 
@@ -116,14 +116,6 @@ public class Person {
     public void setId(int id) {
         this.id = id;
     }
-
-//     public int getDurationOfStay() {
-//         return this.durationOfStay;
-//     }
-
-//     public void setDurationOfStay(int durationOfStay) {
-//         this.durationOfStay = durationOfStay;
-//     }
 
     public int getMinStay(){
         return this.minStay;
@@ -196,8 +188,7 @@ public class Person {
      * adds new WaitTime to stack of all the waits the person as been through
      * @param waitTime the WaitTime they just went through
      */
-    public void addWaitTime(WaitTime waitTime)
-    {
+    public void addWaitTime(WaitTime waitTime) {
         this.waitTimes.add(waitTime);
     }
 
@@ -234,8 +225,22 @@ public class Person {
      */
     public FastPass removeFastPass() {
         if (this.fastPasses.size() > 0) {
-            FastPass toBeUsed = fastPasses.get(0);
+        	FastPass toBeUsed = fastPasses.get(0);
             this.fastPasses.remove(fastPasses.get(0));
+            return toBeUsed;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * peekFastPassToUse
+     * Returns the FastPass that will be used if removeFastPass is called
+     * @return FastPass
+     */
+    public FastPass peekFastPassToUse() {
+    	if (this.fastPasses.size() > 0) {
+        	FastPass toBeUsed = fastPasses.get(0);
             return toBeUsed;
         } else {
             return null;
@@ -249,7 +254,16 @@ public class Person {
     public int numFastPasses() {
         return this.fastPasses.size();
     }
+    
+    public boolean getIsPremium() {
+    	return this.isPremium;
+    }
+    
+    public void setIsPremium(boolean isPremium) {
+    	this.isPremium = isPremium;
+    }
 
+    
     @Override
     public String toString() {
         String toReturn = "PERSON ID: " + this.getId() + "\n";
@@ -286,14 +300,6 @@ public class Person {
             return true;
         }
         return false;
-    }
-
-    public boolean getIsPremium() {
-        return this.isPremium;
-    }
-
-    public void setIsPremium(boolean isPremium) {
-        this.isPremium = isPremium;
     }
 
     /**
