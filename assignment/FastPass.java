@@ -66,5 +66,5 @@ public class FastPass
         passes.add(pass3);
 
         System.out.println(passes);
-    }
+    } 
 }
