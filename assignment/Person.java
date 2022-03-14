@@ -1,3 +1,7 @@
+/**
+ * We affirm that we have carried out my academic endeavors with full academic honesty. Signed, Jason D'Amico, Maggie Kelley and Hawkeye Nadel
+ */
+
 package assignment;
 
 import java.util.ArrayList;
