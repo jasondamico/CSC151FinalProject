@@ -148,6 +148,7 @@ public class Park {
             if(p.isWantsMostRides()) {
                 return getMaxWaitTime(attractions);
             }
+            return attractions.get((int) Math.random() * attractions.size());
         }
         else {
             if(p.isWantsPopularRides() && p.isWantsMostRides()) {
