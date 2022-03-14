@@ -118,7 +118,7 @@ public class Park {
     /**
      * getThreeMostPopular
      * @return ArrayList of the 3 most popular attractions
-     * Time complexity: O(c)
+     * Time complexity: O(1)
      * precondition: There are at least three rides in the park
      */
     private ArrayList<Attraction> getThreeMostPopular(){
@@ -194,7 +194,6 @@ public class Park {
             }
         }
         return this.attractions.get((int) Math.random() * this.attractions.size());
-//    	return null;
     }
 
     /**

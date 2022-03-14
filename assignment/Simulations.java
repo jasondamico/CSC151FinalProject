@@ -23,7 +23,7 @@ public class Simulations
      * @param initialPopulation how many people there are to start off
      * @param newArrivalsPerHalfHour how many new arrivals per half hour
      * @param parkName park's name
-     * Time complexity: O(n^m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
+     * Time complexity: O(n*m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
      * as every 5 minute step, every attraction is iterated through
      */
     public static void noFastPassSimulation(ArrayList<Attraction> ridesInPark, int initialPopulation, int newArrivalsPerHalfHour, String parkName)
@@ -161,11 +161,11 @@ public class Simulations
      * @param initialPopulation how many people there are to start off
      * @param newArrivalsPerHalfHour how many new arrivals per half hour
      * @param parkName park's name
-     * Time complexity: O(n^m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
+     * Time complexity: O(n*m), where n = the duration of the simulation/5 minute steps, and m = the number of attractions in the park,
      * as every 5 minute step, every attraction is iterated through
      */
     public static void FastPassSimulation(double fastPassPercent, ArrayList<Attraction> ridesInPark, int initialPopulation, 
-    		int newArrivalsPerHalfHour, String parkName) {
+        int newArrivalsPerHalfHour, String parkName) {
     	currentTime.setCurrentTime(0);
         
         Park codeLand = new Park(parkName, ridesInPark);
