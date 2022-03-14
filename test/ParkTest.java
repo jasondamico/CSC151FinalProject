@@ -115,8 +115,8 @@ public class ParkTest {
     @Test
     public void pickAttraction() {
         Person p = new Person();
+        p.setMinStay(475);
         p.setWantsPopularRides(true);
-        p.setMinStay(1000);
         Attraction att1 = new Attraction("The Stack Cyclone", 1, 5, 10);
         Attraction att2 = new Attraction("The Queue Coaster", 5, 8, 5);
         ArrayList<Attraction> listOfRides = new ArrayList<>();
