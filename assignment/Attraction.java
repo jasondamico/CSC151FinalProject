@@ -292,7 +292,7 @@ public class Attraction implements Comparable<Attraction> {
     }
 
 
-    /**
+/**
      * closeAttraction
      * When the attraction needs to close, take everyone off the ride and out of line
      * @return ArrayList of people leaving the line & the ride
@@ -300,22 +300,27 @@ public class Attraction implements Comparable<Attraction> {
      */
     public ArrayList<Person> closeAttraction() {
         // People who were in the lines
-        ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
+    	ArrayList<Person> peopleLeavingRide = new ArrayList<>(this.regular);
         peopleLeavingRide.addAll(this.fast);
-
+        
+        for(int i = 0; i < peopleLeavingRide.size(); i++) {
+        	if(peopleLeavingRide.get(i).peekLastWaitTime() != null) {
+        		peopleLeavingRide.get(i).peekLastWaitTime().setEndWait(Simulations.currentTime.getCurrentTime());
+        	}
+        	
+        }
+        
         // Add all people who were on the ride
         for (int i = 0; i < this.onRide.length; i++) {
             Person p = this.onRide[i];
-
+            
             if (p == null) {
                 break;
             } else {
                 peopleLeavingRide.add(p);
             }
         }
-
-        this.setCurrentlyRunning(false);
-
+        
         return peopleLeavingRide;
     }
 
