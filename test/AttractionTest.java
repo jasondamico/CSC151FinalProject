@@ -297,6 +297,13 @@ public class AttractionTest {
         Simulations.currentTime.setCurrentTime(5);
         Person[] offRide = atr.checkRuntime();
 
-        assertArrayEquals(fastPeople, offRide);
+        boolean hasFastPass = true;
+
+        // 66% of fast pass people are always added to ride
+        for (int j = 0; j < (int) (5 * 0.66); j++) {
+            hasFastPass = hasFastPass && offRide[j] == fastPeople[j];
+        }
+
+        assertTrue(hasFastPass);
     }
 }

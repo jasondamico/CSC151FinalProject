@@ -41,10 +41,16 @@ public class PersonTest {
 	public void addSingleFastPass() {
 		Person p = new Person(1);
 		FastPass fp = new FastPass();
+
+		assertFalse(p.hasFastPass());
+
 		p.addFastPass(fp);
-		
 		assertEquals(1, p.numFastPasses());
+		assertTrue(p.hasFastPass());
+
 		assertEquals(p.removeFastPass(), fp);
+		assertFalse(p.hasFastPass());
+		
 		assertEquals(0, p.numFastPasses());
 	}
 
