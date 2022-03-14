@@ -116,7 +116,7 @@ public class Simulations
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
-        ArrayList<GarbageCollector> fineAdditions = new ArrayList<>();
+        ArrayList<DataCollector> fineAdditions = new ArrayList<>();
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
             int timeWaited = 0;
@@ -131,7 +131,7 @@ public class Simulations
                 }
                 totalTimeWaited += waitTime;
             }
-            fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
+            fineAdditions.add(new DataCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
         
         System.out.println("Total time waited:" + " " + totalTimeWaited);
@@ -262,7 +262,7 @@ public class Simulations
 
         ArrayList<Person> doneForDay = codeLand.getDoneForDay();
         int totalTimeWaited = 0;
-        ArrayList<GarbageCollector> fineAdditions = new ArrayList<>();
+        ArrayList<DataCollector> fineAdditions = new ArrayList<>();
         for (int i = 0; i < doneForDay.size(); i++) {
             Person p = doneForDay.get(i);
             int timeWaited = 0;
@@ -277,7 +277,7 @@ public class Simulations
                 }
                 totalTimeWaited += waitTime;
             }
-            fineAdditions.add(new GarbageCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
+            fineAdditions.add(new DataCollector(p.getId(), timeWaited, p.getRidesRidden().size()));
         }
         
         System.out.println("Total time waited:" + " " + totalTimeWaited);
