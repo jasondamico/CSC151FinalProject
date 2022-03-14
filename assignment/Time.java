@@ -23,7 +23,7 @@ public class Time
     /**
      * getCurrentTime
      * shows the current time (in minutes)
-     * @return currentTime
+     * @return
      */
     public int getCurrentTime() //person & attraction use this
     {
@@ -37,8 +37,13 @@ public class Time
      */
     public void setCurrentTime(int currentTime) //main uses this
     {
-        this.currentTime = currentTime;
+        if (currentTime >= 0) {
+            this.currentTime = currentTime;
+        } else {
+            throw new IllegalArgumentException("A positive time value must be passed.");
+        }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
