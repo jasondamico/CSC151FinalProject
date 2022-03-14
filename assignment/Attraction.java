@@ -205,10 +205,19 @@ public class Attraction implements Comparable<Attraction> {
                 Person p;
 
                 // Initializing person
-                if (this.fast.peek() != null) {
-                    p = this.fast.remove();
-                } else {
-                    p = this.regular.remove();
+                // First fill half the ride with people out of the fast lane
+                // Then fill the rest of the ride with as many people out of the regular lane as possible
+                // If the regular lane is empty and the required number of fast past people are already on, the rest are allowed to be fast pass users
+                if (this.fast.peek() != null && seatsFilled < this.capacity*.66) {
+                    p = this.fast.remove(); 
+                }
+                
+                else if(this.regular.peek() != null){
+                    p = this.regular.remove();   
+                }
+                
+                else {
+                	p = this.fast.remove();
                 }
 
                 // Set ending wait time of rider leaving queue
