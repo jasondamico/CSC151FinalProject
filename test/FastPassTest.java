@@ -16,14 +16,14 @@ public class FastPassTest {
     @Test
     public void constructor() {
         FastPass fp = new FastPass();
-        assertNull(fp.getAttraction());
+        assertEquals(fp.getAttractionName(), "UNIVERSAL");
     }
 
     @Test
     public void paramConstructor() {
         Attraction atr = new Attraction("test", 1, 2, 3);
 
-        FastPass fp = new FastPass(atr);
-        assertEquals(fp.getAttraction(), atr);
+        FastPass fp = new FastPass(atr.getName());
+        assertEquals(fp.getAttractionName(), atr.getName());
     }
 }
