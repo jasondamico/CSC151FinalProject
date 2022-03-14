@@ -143,11 +143,9 @@ public class Park {
         if(p.hasFastPass()) {
             if(p.isWantsPopularRides()) {
                 //assertion: attractions is sorted greatest to least by popularity
-                System.out.println("here1");
                 return this.attractions.get(0);
             }
             if(p.isWantsMostRides()) {
-                System.out.println("here2");
                 return getMaxWaitTime(this.attractions);
             }
             return attractions.get((int) (Math.random() * attractions.size()));
