@@ -39,7 +39,7 @@ public class Simulations
             Person guy = new Person(i);
             customers.add(guy);
 
-            Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+            Attraction personsChoice = codeLand.pickAttraction(guy);
             
             if (personsChoice != null) {
                 personsChoice.addPersonToLine(guy, guy.hasFastPass());
@@ -59,7 +59,7 @@ public class Simulations
         		}
         		for(int i = 0; i < newArrivals.size(); i++) {
         			Person guy = newArrivals.get(i);
-        			Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+        			Attraction personsChoice = codeLand.pickAttraction(guy);
                     
                     if (personsChoice != null) {
                         personsChoice.addPersonToLine(guy, guy.hasFastPass());
@@ -85,7 +85,7 @@ public class Simulations
                     Person guy = peopleOffRide[i];
 
                     if (peopleOffRide != null && guy != null) {    
-                        Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+                        Attraction personsChoice = codeLand.pickAttraction(guy);
     
                         if (personsChoice != null) {
                             personsChoice.addPersonToLine(guy, guy.hasFastPass());
@@ -182,7 +182,7 @@ public class Simulations
             	guy.addFastPass(new FastPass("UNIVERSAL"));
             }
 
-            Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+            Attraction personsChoice = codeLand.pickAttraction(guy);
             
             if (personsChoice != null) {
                 personsChoice.addPersonToLine(guy, guy.hasFastPass());
@@ -202,7 +202,7 @@ public class Simulations
         		}
         		for(int i = 0; i < newArrivals.size(); i++) {
         			Person guy = newArrivals.get(i);
-        			Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+        			Attraction personsChoice = codeLand.pickAttraction(guy);
                     
                     if (personsChoice != null) {
                         personsChoice.addPersonToLine(guy, guy.hasFastPass());
@@ -231,7 +231,7 @@ public class Simulations
                     }
 
                     if (peopleOffRide != null && guy != null) {    
-                        Attraction personsChoice = codeLand.pickAttraction(guy, codeLand.getAttractions());
+                        Attraction personsChoice = codeLand.pickAttraction(guy);
     
                         if (personsChoice != null) {
                             personsChoice.addPersonToLine(guy, guy.hasFastPass());
