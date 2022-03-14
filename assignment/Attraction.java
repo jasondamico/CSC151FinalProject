@@ -368,8 +368,34 @@ public class Attraction implements Comparable<Attraction> {
         return toReturn;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Attraction("Foo", 10, 15, 5));
+    public static void main(String[] args)
+    {
+        Time current = new Time();
+        current.setCurrentTime(0);
+        Attraction aerosmith = new Attraction("Rockin' Roller Coaster", 5, 15, 5 );
+        for (int i = 0; i < 20; i++)
+        {
+            Person p = new Person(i);
+            aerosmith.addPersonToLine(p, p.hasFastPass());
+        }
+        System.out.println("good morning! there are " + aerosmith.getCurrentlyInLine() + " people in line for Rockin' Roller Coaster");
+        aerosmith.setRideStartTime(current.getCurrentTime());
+        aerosmith.startRide();
+
+        current.setCurrentTime(current.getCurrentTime() + 5);
+        System.out.println("====== 5 minutes pass ======");
+        if (aerosmith.isCurrentlyRunning())
+        {
+            System.out.println("ride is running! there are: " + aerosmith.getUntilRideDone() + " minutes left in ride");
+        }
+        else
+        {
+            System.out.println("ride is not running");
+        }
+
+        System.out.println("There are " + aerosmith.getCurrentlyInLine() + " people in line for Rockin' Roller Coaster");
+
+        System.out.println("The capacity of the ride is: " + aerosmith.getCapacity());
     }
 
 
