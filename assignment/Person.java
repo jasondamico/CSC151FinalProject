@@ -134,7 +134,13 @@ public class Person {
     }
 
     public void setMinStay(int minStay){
-        this.minStay = minStay;
+        if (minStay >= 1 && minStay <= Simulations.parkHours)
+        {
+            this.maxStay = minStay;
+        }
+        else {
+            throw new IllegalArgumentException("minStay has to greater than 1, and less than or equal to park hours");
+        }
     }
 
     public int getMaxStay(){
@@ -142,6 +148,14 @@ public class Person {
     }
 
     public void setMaxStay(int maxStay){
+        if (maxStay <= Simulations.parkHours)
+        {
+            this.maxStay = maxStay;
+        }
+        else
+        {
+            throw new IllegalArgumentException("The Park Closes after " + Simulations.parkHours/60 + " hours.");
+        }
         this.maxStay = maxStay;
     }
 
@@ -150,7 +164,14 @@ public class Person {
     }
 
     public void setBalkPoint(int balkPoint){
-        this.balkPoint = balkPoint;
+        if (balkPoint >= 1 && balkPoint <= Simulations.parkHours)
+        {
+            this.balkPoint = balkPoint;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Balk Point can't be more than the time the park is open for");
+        }
     }
 
     /**
@@ -349,9 +370,12 @@ public class Person {
         return result;
     }
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             System.out.println(new Person(i));
         }
+
+        Person maggie = new Person(21);
+        maggie.setMaxStay(481); //throws an exception, can't stay after park closes
     }
 }
