@@ -52,7 +52,6 @@ public class Person {
         this.ridesVisited = new ArrayList<>();
         this.fastPasses = new ArrayList<>();
         this.waitTimes = new Stack<>();
-        this.balkPoint = 0;
     }
 
     /**
@@ -134,12 +133,12 @@ public class Person {
     }
 
     public void setMinStay(int minStay){
-        if (minStay >= 1 && minStay <= Simulations.parkHours)
+        if (minStay >= 0 && minStay <= Simulations.parkHours)
         {
             this.maxStay = minStay;
         }
         else {
-            throw new IllegalArgumentException("minStay has to greater than 1, and less than or equal to park hours");
+            throw new IllegalArgumentException("minStay has to greater than 0, and less than or equal to park hours");
         }
     }
 
@@ -164,13 +163,13 @@ public class Person {
     }
 
     public void setBalkPoint(int balkPoint){
-        if (balkPoint >= 1 && balkPoint <= Simulations.parkHours)
+        if (balkPoint >= 1)
         {
             this.balkPoint = balkPoint;
         }
         else
         {
-            throw new IllegalArgumentException("Balk Point can't be more than the time the park is open for");
+            throw new IllegalArgumentException("Balk Point must be 1 or greater.");
         }
     }
 
